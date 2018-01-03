@@ -39,14 +39,20 @@ class SlideRuler extends React.Component {
   }
 
   componentWillReceiveProps(nextProps){
-    this.initDates(nextProps);
+    if(this.props.currentValue != nextProps.currentValue){
+      this.setState({
+        currentValue: nextProps.currentValue
+      },()=>{
+        this.handleCurrentValue();
+      })
+    }
   }
 
   initCanvas(data){
     new Promise((resolve, reject)=>{
       resolve(this.initDates(data))
     }).then(()=>{
-        this.props.getCurrentValue && this.handleCurrentValue();
+      this.handleCurrentValue();
     })
   }
 
@@ -134,7 +140,9 @@ class SlideRuler extends React.Component {
 
   handleScroll(e){
     let scrollLeft = e.target.scrollLeft;
-    window.requestAnimationFrame(() => this.getCurrentValue(scrollLeft));
+    window.requestAnimationFrame(() => {
+      this.props.getCurrentValue && this.getCurrentValue(scrollLeft)}
+    );
   }
 
   //通过滚动计算当前值
@@ -142,7 +150,7 @@ class SlideRuler extends React.Component {
     let currentValue = scrollLeft * this.state.precision / this.state.divide + this.state.minValue;
     let precision = this.state.precision.toString().split('.')[1].length;
     currentValue = precision > 0 ? Math.round(currentValue*(10*precision))/(10*precision) : currentValue;
-    this.props.getCurrentValue && this.props.getCurrentValue(currentValue);
+    this.props.getCurrentValue(currentValue);
   }
 
   //通过当前值计算滚动距离
