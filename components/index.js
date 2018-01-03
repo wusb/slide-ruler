@@ -42,41 +42,41 @@ class SlideRuler extends React.Component {
     this.initDates(nextProps);
   }
 
-  initCanvas(dates){
+  initCanvas(data){
     new Promise((resolve, reject)=>{
-      resolve(this.initDates(dates))
-    }).then((data)=>{
+      resolve(this.initDates(data))
+    }).then(()=>{
         this.props.getCurrentValue && this.handleCurrentValue();
     })
   }
 
-  initDates(dates){
-    let maxValue = dates.maxValue || this.state.maxValue;
-    let minValue = dates.minValue || this.state.minValue;
-    let currentValue = dates.currentValue || this.state.currentValue;
-    let divide = dates.divide || this.state.divide;
-    let precision = dates.precision || this.state.precision;
-    let containerWidth = dates.containerWidth || this.state.containerWidth;
+  initDates(data){
+    let maxValue = data.maxValue || this.state.maxValue;
+    let minValue = data.minValue || this.state.minValue;
+    let currentValue = data.currentValue || this.state.currentValue;
+    let divide = data.divide || this.state.divide;
+    let precision = data.precision || this.state.precision;
+    let containerWidth = data.containerWidth || this.state.containerWidth;
     let canvasWidth = (maxValue/precision * divide + containerWidth - minValue/precision * divide) || this.state.canvasWidth;
     let scrollLeft = (currentValue - minValue) * divide || this.state.scrollLeft;
 
     this.setState({
-      containerWidth: dates.containerWidth || this.state.containerWidth,
-      canvasHeight: dates.canvasHeight || this.state.canvasHeight,
+      containerWidth: data.containerWidth || this.state.containerWidth,
+      canvasHeight: data.canvasHeight || this.state.canvasHeight,
       canvasWidth: canvasWidth,
       scrollLeft: scrollLeft,
-      heightDecimal: dates.heightDecimal || this.state.heightDecimal,
-      heightDigit: dates.heightDigit || this.state.heightDigit,
-      lineWidth: dates.lineWidth || this.state.lineWidth,
-      colorDecimal: dates.colorDecimal || this.state.colorDecimal,
-      colorDigit: dates.colorDigit || this.state.colorDigit,
-      divide: dates.divide || this.state.divide,
-      precision: dates.precision || this.state.precision,
-      fontSize: dates.fontSize || this.state.fontSize,
-      fontColor: dates.fontSize || this.state.fontColor,
-      maxValue: dates.maxValue || this.state.maxValue,
-      minValue: dates.minValue || this.state.minValue,
-      currentValue: dates.currentValue || this.state.currentValue
+      heightDecimal: data.heightDecimal || this.state.heightDecimal,
+      heightDigit: data.heightDigit || this.state.heightDigit,
+      lineWidth: data.lineWidth || this.state.lineWidth,
+      colorDecimal: data.colorDecimal || this.state.colorDecimal,
+      colorDigit: data.colorDigit || this.state.colorDigit,
+      divide: data.divide || this.state.divide,
+      precision: data.precision || this.state.precision,
+      fontSize: data.fontSize || this.state.fontSize,
+      fontColor: data.fontSize || this.state.fontColor,
+      maxValue: data.maxValue || this.state.maxValue,
+      minValue: data.minValue || this.state.minValue,
+      currentValue: data.currentValue || this.state.currentValue
     },()=>{
       this.drawRuler();
   })
@@ -86,7 +86,7 @@ class SlideRuler extends React.Component {
     /* 1.定义变量 */
 
     // 1.1 定义原点，x轴方向起点与终点各留半屏空白
-    let origion = {x: this.state.containerWidth, y: this.state.canvasHeight * 2};
+    let origin = {x: this.state.containerWidth, y: this.state.canvasHeight * 2};
     // 1.2 定义刻度线样式
     let heightDecimal = this.state.heightDecimal * 2;
     let heightDigit = this.state.heightDigit * 2;
@@ -111,13 +111,13 @@ class SlideRuler extends React.Component {
     for (var i = minValue/precision; i <= maxValue/precision; i++) {
       context.beginPath();
       // 2.2 画刻度线
-      context.moveTo(origion.x + (i - minValue/precision) * divide, 0);
+      context.moveTo(origin.x + (i - minValue/precision) * divide, 0);
       // 画线到刻度高度，10的位数就加高
-      context.lineTo(origion.x + (i - minValue/precision) * divide, i* 2 % divide == 0 ? heightDecimal : heightDigit);
+      context.lineTo(origin.x + (i - minValue/precision) * divide, i* 2 % divide == 0 ? heightDecimal : heightDigit);
       // 设置属性
       context.lineWidth = this.state.lineWidth  * 2;
       // 10的位数就加深
-      context.strokeStyle = (i % divide == 0) ? colorDecimal : colorDigit;
+      context.strokeStyle = (i * 2 % divide == 0) ? colorDecimal : colorDigit;
       // 描线
       context.stroke();
       // 2.3 描绘刻度值
@@ -126,7 +126,7 @@ class SlideRuler extends React.Component {
       context.textBaseline = "top";
       if (i* 2 % divide == 0) {
         context.font = `${fontSize}px Arial`;
-        context.fillText(i * precision, origion.x + (i - minValue/precision) * divide, heightDecimal);
+        context.fillText(i * precision, origin.x + (i - minValue/precision) * divide, heightDecimal);
       }
       context.closePath();
     }
@@ -152,14 +152,13 @@ class SlideRuler extends React.Component {
   }
 
   render() {
-
     return (
-        <div className={s.container}>
-  <div className={s.rulerBox} onScroll={this.handleScroll} ref='rulerBox'>
-        <canvas ref='SlideRuler' style={{width:this.state.canvasWidth,height:this.state.canvasHeight}} width={this.state.canvasWidth * 2} height={this.state.canvasHeight * 2}></canvas>
-    </div>
-    </div>
-  );
+      <div className={s.container}>
+        <div className={s.rulerBox} onScroll={this.handleScroll} ref='rulerBox'>
+            <canvas ref='SlideRuler' style={{width:this.state.canvasWidth,height:this.state.canvasHeight}} width={this.state.canvasWidth * 2} height={this.state.canvasHeight * 2}></canvas>
+        </div>
+      </div>
+    );
   }
 }
 
