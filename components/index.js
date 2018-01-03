@@ -45,9 +45,9 @@ class SlideRuler extends React.Component {
   initCanvas(dates){
     new Promise((resolve, reject)=>{
       resolve(this.initDates(dates))
-  }).then((data)=>{
-      this.props.getCurrentValue && this.handleCurrentValue();
-  })
+    }).then((data)=>{
+        this.props.getCurrentValue && this.handleCurrentValue();
+    })
   }
 
   initDates(dates){
@@ -142,7 +142,7 @@ class SlideRuler extends React.Component {
     let currentValue = scrollLeft * this.state.precision / this.state.divide + this.state.minValue;
     let precision = this.state.precision.toString().split('.')[1].length;
     currentValue = precision > 0 ? Math.round(currentValue*(10*precision))/(10*precision) : currentValue;
-    this.props.getCurrentValue(currentValue);
+    this.props.getCurrentValue && this.props.getCurrentValue(currentValue);
   }
 
   //通过当前值计算滚动距离

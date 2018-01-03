@@ -1,5 +1,5 @@
 {
-  "name": "slideRuler",
+  "name": "slide-ruler",
   "version": "0.0.1",
   "main": "build/component.js",
   "repository": "https://github.com/simbawu610/react-slideRuler.git",
@@ -17,10 +17,11 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0"
+
   },
   "devDependencies": {
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-polyfill": "^6.26.0",
@@ -32,6 +33,10 @@
     "style-loader": "^0.18.2",
     "webpack": "^3.5.5",
     "webpack-dev-server": "^2.7.1"
+  },
+  "peerDependencies":{
+    "react": ">=15.4.2",
+    "react-dom": ">=15.4.2"
   },
   "scripts": {
     "build": "webpack --config ./build/webpack.config.js",

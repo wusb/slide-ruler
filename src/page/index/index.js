@@ -2,7 +2,7 @@
  * Created by simba on 09/11/2017.
  */
 import React from 'react';
-import SlideRuler from '../../../components/index.js'
+import SlideRuler from '../../../components/index.js';
 
 class IndexPage extends React.Component {
 

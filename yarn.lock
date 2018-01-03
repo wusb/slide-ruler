@@ -4158,6 +4158,13 @@ slash@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/slash/-/slash-1.0.0.tgz#c41f2f6c39fc16d1cd17ad4b5d896114ae470d55"
 
+slide-ruler@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/slide-ruler/-/slide-ruler-0.0.1.tgz#f6ce7781213fb613dffcee232aa54f191951de67"
+  dependencies:
+    react "^16.2.0"
+    react-dom "^16.2.0"
+
 sntp@1.x.x:
   version "1.0.9"
   resolved "https://registry.yarnpkg.com/sntp/-/sntp-1.0.9.tgz#6541184cc90aeea6c6e7b35e2659082443c66198"
