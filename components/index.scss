@@ -1,0 +1,13 @@
+.container{
+  width: 100%;
+}
+
+.rulerBox{
+  width: 100%;
+  height: 83px;
+  overflow-y: auto;
+
+  &::-webkit-scrollbar{
+    display: none;
+  }
+}
