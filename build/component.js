@@ -154,52 +154,60 @@ var SlideRuler = function (_React$Component) {
   }, {
     key: 'componentWillReceiveProps',
     value: function componentWillReceiveProps(nextProps) {
-      this.initDates(nextProps);
+      var _this2 = this;
+
+      if (this.props.currentValue != nextProps.currentValue) {
+        this.setState({
+          currentValue: nextProps.currentValue
+        }, function () {
+          _this2.handleCurrentValue();
+        });
+      }
     }
   }, {
     key: 'initCanvas',
-    value: function initCanvas(dates) {
-      var _this2 = this;
+    value: function initCanvas(data) {
+      var _this3 = this;
 
       new Promise(function (resolve, reject) {
-        resolve(_this2.initDates(dates));
-      }).then(function (data) {
-        _this2.props.getCurrentValue && _this2.handleCurrentValue();
+        resolve(_this3.initDates(data));
+      }).then(function () {
+        _this3.handleCurrentValue();
       });
     }
   }, {
     key: 'initDates',
-    value: function initDates(dates) {
-      var _this3 = this;
+    value: function initDates(data) {
+      var _this4 = this;
 
-      var maxValue = dates.maxValue || this.state.maxValue;
-      var minValue = dates.minValue || this.state.minValue;
-      var currentValue = dates.currentValue || this.state.currentValue;
-      var divide = dates.divide || this.state.divide;
-      var precision = dates.precision || this.state.precision;
-      var containerWidth = dates.containerWidth || this.state.containerWidth;
+      var maxValue = data.maxValue || this.state.maxValue;
+      var minValue = data.minValue || this.state.minValue;
+      var currentValue = data.currentValue || this.state.currentValue;
+      var divide = data.divide || this.state.divide;
+      var precision = data.precision || this.state.precision;
+      var containerWidth = data.containerWidth || this.state.containerWidth;
       var canvasWidth = maxValue / precision * divide + containerWidth - minValue / precision * divide || this.state.canvasWidth;
       var scrollLeft = (currentValue - minValue) * divide || this.state.scrollLeft;
 
       this.setState({
-        containerWidth: dates.containerWidth || this.state.containerWidth,
-        canvasHeight: dates.canvasHeight || this.state.canvasHeight,
+        containerWidth: data.containerWidth || this.state.containerWidth,
+        canvasHeight: data.canvasHeight || this.state.canvasHeight,
         canvasWidth: canvasWidth,
         scrollLeft: scrollLeft,
-        heightDecimal: dates.heightDecimal || this.state.heightDecimal,
-        heightDigit: dates.heightDigit || this.state.heightDigit,
-        lineWidth: dates.lineWidth || this.state.lineWidth,
-        colorDecimal: dates.colorDecimal || this.state.colorDecimal,
-        colorDigit: dates.colorDigit || this.state.colorDigit,
-        divide: dates.divide || this.state.divide,
-        precision: dates.precision || this.state.precision,
-        fontSize: dates.fontSize || this.state.fontSize,
-        fontColor: dates.fontSize || this.state.fontColor,
-        maxValue: dates.maxValue || this.state.maxValue,
-        minValue: dates.minValue || this.state.minValue,
-        currentValue: dates.currentValue || this.state.currentValue
+        heightDecimal: data.heightDecimal || this.state.heightDecimal,
+        heightDigit: data.heightDigit || this.state.heightDigit,
+        lineWidth: data.lineWidth || this.state.lineWidth,
+        colorDecimal: data.colorDecimal || this.state.colorDecimal,
+        colorDigit: data.colorDigit || this.state.colorDigit,
+        divide: data.divide || this.state.divide,
+        precision: data.precision || this.state.precision,
+        fontSize: data.fontSize || this.state.fontSize,
+        fontColor: data.fontSize || this.state.fontColor,
+        maxValue: data.maxValue || this.state.maxValue,
+        minValue: data.minValue || this.state.minValue,
+        currentValue: data.currentValue || this.state.currentValue
       }, function () {
-        _this3.drawRuler();
+        _this4.drawRuler();
       });
     }
   }, {
@@ -208,7 +216,7 @@ var SlideRuler = function (_React$Component) {
       /* 1.定义变量 */
 
       // 1.1 定义原点，x轴方向起点与终点各留半屏空白
-      var origion = { x: this.state.containerWidth, y: this.state.canvasHeight * 2 };
+      var origin = { x: this.state.containerWidth, y: this.state.canvasHeight * 2 };
       // 1.2 定义刻度线样式
       var heightDecimal = this.state.heightDecimal * 2;
       var heightDigit = this.state.heightDigit * 2;
@@ -234,13 +242,13 @@ var SlideRuler = function (_React$Component) {
       for (var i = minValue / precision; i <= maxValue / precision; i++) {
         context.beginPath();
         // 2.2 画刻度线
-        context.moveTo(origion.x + (i - minValue / precision) * divide, 0);
+        context.moveTo(origin.x + (i - minValue / precision) * divide, 0);
         // 画线到刻度高度，10的位数就加高
-        context.lineTo(origion.x + (i - minValue / precision) * divide, i * 2 % divide == 0 ? heightDecimal : heightDigit);
+        context.lineTo(origin.x + (i - minValue / precision) * divide, i * 2 % divide == 0 ? heightDecimal : heightDigit);
         // 设置属性
         context.lineWidth = this.state.lineWidth * 2;
         // 10的位数就加深
-        context.strokeStyle = i % divide == 0 ? colorDecimal : colorDigit;
+        context.strokeStyle = i * 2 % divide == 0 ? colorDecimal : colorDigit;
         // 描线
         context.stroke();
         // 2.3 描绘刻度值
@@ -249,7 +257,7 @@ var SlideRuler = function (_React$Component) {
         context.textBaseline = "top";
         if (i * 2 % divide == 0) {
           context.font = fontSize + 'px Arial';
-          context.fillText(i * precision, origion.x + (i - minValue / precision) * divide, heightDecimal);
+          context.fillText(i * precision, origin.x + (i - minValue / precision) * divide, heightDecimal);
         }
         context.closePath();
       }
@@ -257,11 +265,11 @@ var SlideRuler = function (_React$Component) {
   }, {
     key: 'handleScroll',
     value: function handleScroll(e) {
-      var _this4 = this;
+      var _this5 = this;
 
       var scrollLeft = e.target.scrollLeft;
       window.requestAnimationFrame(function () {
-        return _this4.getCurrentValue(scrollLeft);
+        _this5.props.getCurrentValue && _this5.getCurrentValue(scrollLeft);
       });
     }
 
@@ -287,7 +295,6 @@ var SlideRuler = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-
       return _react2.default.createElement(
         'div',
         { className: _index2.default.container },
