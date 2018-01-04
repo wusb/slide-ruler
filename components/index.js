@@ -148,7 +148,8 @@ class SlideRuler extends React.Component {
   //通过滚动计算当前值
   getCurrentValue(scrollLeft){
     let currentValue = scrollLeft * this.state.precision / this.state.divide + this.state.minValue;
-    let precision = this.state.precision.toString().split('.')[1].length;
+    let precision = this.state.precision.toString().split('.')[1];
+    precision = precision ? precision.length : 0;
     currentValue = precision > 0 ? Math.round(currentValue*(10*precision))/(10*precision) : currentValue;
     this.props.getCurrentValue(currentValue);
   }
