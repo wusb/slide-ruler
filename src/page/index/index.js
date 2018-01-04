@@ -8,6 +8,12 @@ class IndexPage extends React.Component {
 
   constructor() {
     super();
+
+    this.state = {
+      currentValue: 0
+    };
+
+    this.getCurrentValue = this.getCurrentValue.bind(this);
   }
 
   componentDidMount(){
@@ -19,12 +25,18 @@ class IndexPage extends React.Component {
 
   }
 
+  getCurrentValue(currentValue){
+    this.setState({
+      currentValue:currentValue
+    })
+  }
 
   render() {
 
     return (
       <div>
-        <SlideRuler />
+        <SlideRuler getCurrentValue={this.getCurrentValue} maxValue={2.1} minValue={1.1} precision={0.001}/>
+        <p>{this.state.currentValue}</p>
       </div>
     );
   }

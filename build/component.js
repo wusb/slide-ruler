@@ -130,12 +130,12 @@ var SlideRuler = function (_React$Component) {
       colorDecimal: '#909090',
       colorDigit: '#b4b4b4',
       divide: 10,
-      precision: 0.1,
+      precision: 1,
       fontSize: 20,
       fontColor: '#666666',
       maxValue: 190,
       minValue: 30,
-      currentValue: 60
+      currentValue: 0
     };
 
     _this.initCanvas = _this.initCanvas.bind(_this);
@@ -233,6 +233,8 @@ var SlideRuler = function (_React$Component) {
       // 1.6定义每个刻度的精度
       var precision = this.state.precision;
 
+      var derivative = 1 / precision;
+
       /* 2.绘制 */
 
       // 2.1初始化context
@@ -257,7 +259,7 @@ var SlideRuler = function (_React$Component) {
         context.textBaseline = "top";
         if (i * 2 % divide == 0) {
           context.font = fontSize + 'px Arial';
-          context.fillText(i * precision, origin.x + (i - minValue / precision) * divide, heightDecimal);
+          context.fillText(Math.round(i / 10) / (derivative / 10), origin.x + (i - minValue / precision) * divide, heightDecimal);
         }
         context.closePath();
       }
@@ -278,10 +280,10 @@ var SlideRuler = function (_React$Component) {
   }, {
     key: 'getCurrentValue',
     value: function getCurrentValue(scrollLeft) {
-      var currentValue = scrollLeft * this.state.precision / this.state.divide + this.state.minValue;
-      var precision = this.state.precision.toString().split('.')[1];
-      precision = precision ? precision.length : 0;
-      currentValue = precision > 0 ? Math.round(currentValue * (10 * precision)) / (10 * precision) : currentValue;
+      var precision = this.state.precision;
+      var scrollLeftValue = scrollLeft * precision / this.state.divide;
+      var currentValue = Math.round((scrollLeftValue + this.state.minValue) / precision) / (1 / precision);
+
       this.props.getCurrentValue(currentValue);
     }
 
@@ -353,7 +355,7 @@ exports = module.exports = __webpack_require__(4)(undefined);
 
 
 // module
-exports.push([module.i, ".index_container_2Qv {\n  width: 100%; }\n\n.index_rulerBox_2bx {\n  width: 100%;\n  height: 83px;\n  overflow-y: auto; }\n  .index_rulerBox_2bx::-webkit-scrollbar {\n    display: none; }\n", ""]);
+exports.push([module.i, "body, div {\n  margin: 0;\n  padding: 0; }\n\n.index_container_2Qv {\n  width: 100%; }\n\n.index_rulerBox_2bx {\n  width: 100%;\n  height: 83px;\n  overflow-y: auto; }\n  .index_rulerBox_2bx::-webkit-scrollbar {\n    display: none; }\n", ""]);
 
 // exports
 exports.locals = {

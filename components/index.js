@@ -19,12 +19,12 @@ class SlideRuler extends React.Component {
       colorDecimal: '#909090',
       colorDigit: '#b4b4b4',
       divide: 10,
-      precision: 0.1,
+      precision: 1,
       fontSize: 20,
       fontColor: '#666666',
       maxValue: 190,
       minValue: 30,
-      currentValue: 60
+      currentValue: 0
     };
 
     this.initCanvas = this.initCanvas.bind(this);
@@ -108,6 +108,8 @@ class SlideRuler extends React.Component {
     // 1.6定义每个刻度的精度
     let precision = this.state.precision;
 
+    let derivative = 1 / precision;
+
     /* 2.绘制 */
 
     // 2.1初始化context
@@ -132,7 +134,7 @@ class SlideRuler extends React.Component {
       context.textBaseline = "top";
       if (i* 2 % divide == 0) {
         context.font = `${fontSize}px Arial`;
-        context.fillText(i * precision, origin.x + (i - minValue/precision) * divide, heightDecimal);
+        context.fillText(Math.round(i / 10) / (derivative / 10), origin.x + (i - minValue/precision) * divide, heightDecimal);
       }
       context.closePath();
     }
@@ -147,10 +149,10 @@ class SlideRuler extends React.Component {
 
   //通过滚动计算当前值
   getCurrentValue(scrollLeft){
-    let currentValue = scrollLeft * this.state.precision / this.state.divide + this.state.minValue;
-    let precision = this.state.precision.toString().split('.')[1];
-    precision = precision ? precision.length : 0;
-    currentValue = precision > 0 ? Math.round(currentValue*(10*precision))/(10*precision) : currentValue;
+    let precision = this.state.precision;
+    let scrollLeftValue = scrollLeft * precision / this.state.divide;
+    let currentValue = Math.round((scrollLeftValue + this.state.minValue)/precision) / (1/precision);
+
     this.props.getCurrentValue(currentValue);
   }
 
