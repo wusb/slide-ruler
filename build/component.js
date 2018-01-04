@@ -279,7 +279,8 @@ var SlideRuler = function (_React$Component) {
     key: 'getCurrentValue',
     value: function getCurrentValue(scrollLeft) {
       var currentValue = scrollLeft * this.state.precision / this.state.divide + this.state.minValue;
-      var precision = this.state.precision.toString().split('.')[1].length;
+      var precision = this.state.precision.toString().split('.')[1];
+      precision = precision ? precision.length : 0;
       currentValue = precision > 0 ? Math.round(currentValue * (10 * precision)) / (10 * precision) : currentValue;
       this.props.getCurrentValue(currentValue);
     }
