@@ -35,7 +35,10 @@ class IndexPage extends React.Component {
 
     return (
       <div>
-        <SlideRuler getCurrentValue={this.getCurrentValue} maxValue={2.1} minValue={1.1} precision={0.001}/>
+        <SlideRuler getCurrentValue={this.getCurrentValue}
+                    maxValue={200}
+                    minValue={20}
+                    divide={5} precision={0.1}/>
         <p>{this.state.currentValue}</p>
       </div>
     );
