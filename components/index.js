@@ -13,8 +13,8 @@ class SlideRuler extends React.Component {
       canvasHeight: 83,
       canvasWidth: 375,
       scrollLeft: 0,
-      heightDecimal: 50,
-      heightDigit: 25,
+      heightDecimal: 35,
+      heightDigit: 18,
       lineWidth: 2,
       colorDecimal: '#909090',
       colorDigit: '#b4b4b4',
@@ -22,8 +22,8 @@ class SlideRuler extends React.Component {
       precision: 1,
       fontSize: 20,
       fontColor: '#666666',
-      maxValue: 190,
-      minValue: 30,
+      maxValue: 230,
+      minValue: 100,
       currentValue: 0
     };
 
@@ -121,18 +121,18 @@ class SlideRuler extends React.Component {
       // 2.2 画刻度线
       context.moveTo(origin.x + (i - minValue/precision) * divide, 0);
       // 画线到刻度高度，10的位数就加高
-      context.lineTo(origin.x + (i - minValue/precision) * divide, i* 2 % divide == 0 ? heightDecimal : heightDigit);
+      context.lineTo(origin.x + (i - minValue/precision) * divide, i* 2 % 20 == 0 ? heightDecimal : heightDigit);
       // 设置属性
       context.lineWidth = this.state.lineWidth  * 2;
       // 10的位数就加深
-      context.strokeStyle = (i * 2 % divide == 0) ? colorDecimal : colorDigit;
+      context.strokeStyle = (i * 2 % 20 == 0) ? colorDecimal : colorDigit;
       // 描线
       context.stroke();
       // 2.3 描绘刻度值
       context.fillStyle = fontColor;
       context.textAlign = "center";
       context.textBaseline = "top";
-      if (i* 2 % divide == 0) {
+      if (i* 2 % 20 == 0) {
         context.font = `${fontSize}px Arial`;
         context.fillText(Math.round(i / 10) / (derivative / 10), origin.x + (i - minValue/precision) * divide, heightDecimal);
       }
