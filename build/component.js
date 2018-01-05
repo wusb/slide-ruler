@@ -124,8 +124,8 @@ var SlideRuler = function (_React$Component) {
       canvasHeight: 83,
       canvasWidth: 375,
       scrollLeft: 0,
-      heightDecimal: 50,
-      heightDigit: 25,
+      heightDecimal: 35,
+      heightDigit: 18,
       lineWidth: 2,
       colorDecimal: '#909090',
       colorDigit: '#b4b4b4',
@@ -133,8 +133,8 @@ var SlideRuler = function (_React$Component) {
       precision: 1,
       fontSize: 20,
       fontColor: '#666666',
-      maxValue: 190,
-      minValue: 30,
+      maxValue: 230,
+      minValue: 100,
       currentValue: 0
     };
 
@@ -246,18 +246,18 @@ var SlideRuler = function (_React$Component) {
         // 2.2 画刻度线
         context.moveTo(origin.x + (i - minValue / precision) * divide, 0);
         // 画线到刻度高度，10的位数就加高
-        context.lineTo(origin.x + (i - minValue / precision) * divide, i * 2 % divide == 0 ? heightDecimal : heightDigit);
+        context.lineTo(origin.x + (i - minValue / precision) * divide, i * 2 % 20 == 0 ? heightDecimal : heightDigit);
         // 设置属性
         context.lineWidth = this.state.lineWidth * 2;
         // 10的位数就加深
-        context.strokeStyle = i * 2 % divide == 0 ? colorDecimal : colorDigit;
+        context.strokeStyle = i * 2 % 20 == 0 ? colorDecimal : colorDigit;
         // 描线
         context.stroke();
         // 2.3 描绘刻度值
         context.fillStyle = fontColor;
         context.textAlign = "center";
         context.textBaseline = "top";
-        if (i * 2 % divide == 0) {
+        if (i * 2 % 20 == 0) {
           context.font = fontSize + 'px Arial';
           context.fillText(Math.round(i / 10) / (derivative / 10), origin.x + (i - minValue / precision) * divide, heightDecimal);
         }
@@ -355,7 +355,7 @@ exports = module.exports = __webpack_require__(4)(undefined);
 
 
 // module
-exports.push([module.i, "body, div {\n  margin: 0;\n  padding: 0; }\n\n.index_container_2Qv {\n  width: 100%; }\n\n.index_rulerBox_2bx {\n  width: 100%;\n  height: 83px;\n  overflow-y: auto; }\n  .index_rulerBox_2bx::-webkit-scrollbar {\n    display: none; }\n", ""]);
+exports.push([module.i, "body, div {\n  margin: 0;\n  padding: 0; }\n\n.index_container_2Qv {\n  position: relative;\n  width: 100%; }\n  .index_container_2Qv:before {\n    position: absolute;\n    left: 50%;\n    bottom: 0;\n    transform: translateX(-50%);\n    content: '';\n    width: 1px;\n    height: 100%;\n    background-color: #ffa000; }\n  .index_container_2Qv:after {\n    position: absolute;\n    left: 50%;\n    bottom: 0;\n    transform: translateX(-50%);\n    content: '';\n    width: 0;\n    height: 0;\n    border-right: 8px solid transparent;\n    border-bottom: 12px solid #ffa000;\n    border-left: 8px solid transparent; }\n\n.index_rulerBox_2bx {\n  width: 100%;\n  height: 83px;\n  overflow-y: hidden;\n  overflow-x: auto;\n  -webkit-overflow-scrolling: touch;\n  border-top: 1px solid #8b8b8b;\n  border-bottom: 1px solid #8b8b8b; }\n  .index_rulerBox_2bx::-webkit-scrollbar {\n    display: none; }\n", ""]);
 
 // exports
 exports.locals = {
