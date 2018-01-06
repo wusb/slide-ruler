@@ -70,7 +70,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	__webpack_require__.p = "/build/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 11);
+/******/ 	return __webpack_require__(__webpack_require__.s = 13);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -81,290 +81,6 @@ module.exports = __WEBPACK_EXTERNAL_MODULE_0__;
 
 /***/ }),
 /* 1 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(0);
-
-var _react2 = _interopRequireDefault(_react);
-
-var _index = __webpack_require__(2);
-
-var _index2 = _interopRequireDefault(_index);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Created by simba on 01/02/2018.
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
-
-
-var SlideRuler = function (_React$Component) {
-  _inherits(SlideRuler, _React$Component);
-
-  function SlideRuler() {
-    _classCallCheck(this, SlideRuler);
-
-    var _this = _possibleConstructorReturn(this, (SlideRuler.__proto__ || Object.getPrototypeOf(SlideRuler)).call(this));
-
-    _this.state = {
-      containerWidth: window.screen.width || 375,
-      canvasHeight: 83,
-      canvasWidth: 375,
-      scrollLeft: 0,
-      heightDecimal: 35,
-      heightDigit: 18,
-      lineWidth: 2,
-      colorDecimal: '#909090',
-      colorDigit: '#b4b4b4',
-      divide: 10,
-      precision: 1,
-      fontSize: 20,
-      fontColor: '#666666',
-      maxValue: 230,
-      minValue: 100,
-      currentValue: 0
-    };
-
-    _this.initCanvas = _this.initCanvas.bind(_this);
-    _this.initDates = _this.initDates.bind(_this);
-    _this.drawRuler = _this.drawRuler.bind(_this);
-    _this.handleScroll = _this.handleScroll.bind(_this);
-    _this.getCurrentValue = _this.getCurrentValue.bind(_this);
-    return _this;
-  }
-
-  _createClass(SlideRuler, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
-      this.initCanvas(this.props);
-    }
-  }, {
-    key: 'componentWillReceiveProps',
-    value: function componentWillReceiveProps(nextProps) {
-      var _this2 = this;
-
-      if (this.props.currentValue != nextProps.currentValue) {
-        this.setState({
-          currentValue: nextProps.currentValue
-        }, function () {
-          _this2.handleCurrentValue();
-        });
-      }
-    }
-  }, {
-    key: 'initCanvas',
-    value: function initCanvas(data) {
-      var _this3 = this;
-
-      new Promise(function (resolve, reject) {
-        resolve(_this3.initDates(data));
-      }).then(function () {
-        _this3.handleCurrentValue();
-      });
-    }
-  }, {
-    key: 'initDates',
-    value: function initDates(data) {
-      var _this4 = this;
-
-      var maxValue = data.maxValue || this.state.maxValue;
-      var minValue = data.minValue || this.state.minValue;
-      var currentValue = data.currentValue || this.state.currentValue;
-      var divide = data.divide || this.state.divide;
-      var precision = data.precision || this.state.precision;
-      var containerWidth = data.containerWidth || this.state.containerWidth;
-      var canvasWidth = maxValue / precision * divide + containerWidth - minValue / precision * divide || this.state.canvasWidth;
-      var scrollLeft = (currentValue - minValue) * divide || this.state.scrollLeft;
-
-      this.setState({
-        containerWidth: data.containerWidth || this.state.containerWidth,
-        canvasHeight: data.canvasHeight || this.state.canvasHeight,
-        canvasWidth: canvasWidth,
-        scrollLeft: scrollLeft,
-        heightDecimal: data.heightDecimal || this.state.heightDecimal,
-        heightDigit: data.heightDigit || this.state.heightDigit,
-        lineWidth: data.lineWidth || this.state.lineWidth,
-        colorDecimal: data.colorDecimal || this.state.colorDecimal,
-        colorDigit: data.colorDigit || this.state.colorDigit,
-        divide: data.divide || this.state.divide,
-        precision: data.precision || this.state.precision,
-        fontSize: data.fontSize || this.state.fontSize,
-        fontColor: data.fontSize || this.state.fontColor,
-        maxValue: data.maxValue || this.state.maxValue,
-        minValue: data.minValue || this.state.minValue,
-        currentValue: data.currentValue || this.state.currentValue
-      }, function () {
-        _this4.drawRuler();
-      });
-    }
-  }, {
-    key: 'drawRuler',
-    value: function drawRuler() {
-      /* 1.定义变量 */
-
-      // 1.1 定义原点，x轴方向起点与终点各留半屏空白
-      var origin = { x: this.state.containerWidth, y: this.state.canvasHeight * 2 };
-      // 1.2 定义刻度线样式
-      var heightDecimal = this.state.heightDecimal * 2;
-      var heightDigit = this.state.heightDigit * 2;
-      var colorDecimal = this.state.colorDecimal;
-      var colorDigit = this.state.colorDigit;
-      // 1.3 定义刻度字体样式
-      var fontSize = this.state.fontSize * 2;
-      var fontColor = this.state.fontColor;
-      // 1.4 总刻度值
-      var maxValue = this.state.maxValue,
-          minValue = this.state.minValue;
-      // 1.5 每个刻度所占位的px
-      var divide = this.state.divide * 2;
-      // 1.6定义每个刻度的精度
-      var precision = this.state.precision;
-
-      var derivative = 1 / precision;
-
-      /* 2.绘制 */
-
-      // 2.1初始化context
-      var canvas = this.refs.SlideRuler,
-          context = canvas.getContext('2d');
-      // 遍历maxValue
-      for (var i = minValue / precision; i <= maxValue / precision; i++) {
-        context.beginPath();
-        // 2.2 画刻度线
-        context.moveTo(origin.x + (i - minValue / precision) * divide, 0);
-        // 画线到刻度高度，10的位数就加高
-        context.lineTo(origin.x + (i - minValue / precision) * divide, i * 2 % 20 == 0 ? heightDecimal : heightDigit);
-        // 设置属性
-        context.lineWidth = this.state.lineWidth * 2;
-        // 10的位数就加深
-        context.strokeStyle = i * 2 % 20 == 0 ? colorDecimal : colorDigit;
-        // 描线
-        context.stroke();
-        // 2.3 描绘刻度值
-        context.fillStyle = fontColor;
-        context.textAlign = "center";
-        context.textBaseline = "top";
-        if (i * 2 % 20 == 0) {
-          context.font = fontSize + 'px Arial';
-          context.fillText(Math.round(i / 10) / (derivative / 10), origin.x + (i - minValue / precision) * divide, heightDecimal);
-        }
-        context.closePath();
-      }
-    }
-  }, {
-    key: 'handleScroll',
-    value: function handleScroll(e) {
-      var _this5 = this;
-
-      var scrollLeft = e.target.scrollLeft;
-      window.requestAnimationFrame(function () {
-        _this5.props.getCurrentValue && _this5.getCurrentValue(scrollLeft);
-      });
-    }
-
-    //通过滚动计算当前值
-
-  }, {
-    key: 'getCurrentValue',
-    value: function getCurrentValue(scrollLeft) {
-      var precision = this.state.precision;
-      var scrollLeftValue = scrollLeft * precision / this.state.divide;
-      var currentValue = Math.round((scrollLeftValue + this.state.minValue) / precision) / (1 / precision);
-
-      this.props.getCurrentValue(currentValue);
-    }
-
-    //通过当前值计算滚动距离
-
-  }, {
-    key: 'handleCurrentValue',
-    value: function handleCurrentValue() {
-      var scrollLeft = (this.state.currentValue - this.state.minValue) * this.state.divide / this.state.precision;
-      this.refs.rulerBox.scrollLeft = scrollLeft;
-    }
-  }, {
-    key: 'render',
-    value: function render() {
-      return _react2.default.createElement(
-        'div',
-        { className: _index2.default.container },
-        _react2.default.createElement(
-          'div',
-          { className: _index2.default.rulerBox, onScroll: this.handleScroll, ref: 'rulerBox' },
-          _react2.default.createElement('canvas', { ref: 'SlideRuler', style: { width: this.state.canvasWidth, height: this.state.canvasHeight }, width: this.state.canvasWidth * 2, height: this.state.canvasHeight * 2 })
-        )
-      );
-    }
-  }]);
-
-  return SlideRuler;
-}(_react2.default.Component);
-
-exports.default = SlideRuler;
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(3);
-if(typeof content === 'string') content = [[module.i, content, '']];
-// Prepare cssTransformation
-var transform;
-
-var options = {}
-options.transform = transform
-// add the styles to the DOM
-var update = __webpack_require__(5)(content, options);
-if(content.locals) module.exports = content.locals;
-// Hot Module Replacement
-if(false) {
-	// When the styles change, update the <style> tags
-	if(!content.locals) {
-		module.hot.accept("!!../node_modules/css-loader/index.js??ref--1-1!../node_modules/sass-loader/lib/loader.js!./index.scss", function() {
-			var newContent = require("!!../node_modules/css-loader/index.js??ref--1-1!../node_modules/sass-loader/lib/loader.js!./index.scss");
-			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-			update(newContent);
-		});
-	}
-	// When the module is disposed, remove the <style> tags
-	module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(4)(undefined);
-// imports
-
-
-// module
-exports.push([module.i, "body, div {\n  margin: 0;\n  padding: 0; }\n\n.index_container_2Qv {\n  position: relative;\n  width: 100%; }\n  .index_container_2Qv:before {\n    position: absolute;\n    left: 50%;\n    bottom: 0;\n    transform: translateX(-50%);\n    content: '';\n    width: 1px;\n    height: 100%;\n    background-color: #ffa000; }\n  .index_container_2Qv:after {\n    position: absolute;\n    left: 50%;\n    bottom: 0;\n    transform: translateX(-50%);\n    content: '';\n    width: 0;\n    height: 0;\n    border-right: 8px solid transparent;\n    border-bottom: 12px solid #ffa000;\n    border-left: 8px solid transparent; }\n\n.index_rulerBox_2bx {\n  width: 100%;\n  height: 83px;\n  overflow-y: hidden;\n  overflow-x: auto;\n  -webkit-overflow-scrolling: touch;\n  border-top: 1px solid #8b8b8b;\n  border-bottom: 1px solid #8b8b8b; }\n  .index_rulerBox_2bx::-webkit-scrollbar {\n    display: none; }\n", ""]);
-
-// exports
-exports.locals = {
-	"container": "index_container_2Qv",
-	"rulerBox": "index_rulerBox_2bx"
-};
-
-/***/ }),
-/* 4 */
 /***/ (function(module, exports) {
 
 /*
@@ -446,7 +162,7 @@ function toComment(sourceMap) {
 
 
 /***/ }),
-/* 5 */
+/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -492,7 +208,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(6);
+var	fixUrls = __webpack_require__(3);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -805,7 +521,7 @@ function updateLink (link, options, obj) {
 
 
 /***/ }),
-/* 6 */
+/* 3 */
 /***/ (function(module, exports) {
 
 
@@ -900,14 +616,300 @@ module.exports = function (css) {
 
 
 /***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _index = __webpack_require__(5);
+
+var _index2 = _interopRequireDefault(_index);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /**
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * Created by simba on 01/02/2018.
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
+
+
+var SlideRuler = function (_React$Component) {
+  _inherits(SlideRuler, _React$Component);
+
+  function SlideRuler() {
+    _classCallCheck(this, SlideRuler);
+
+    var _this = _possibleConstructorReturn(this, (SlideRuler.__proto__ || Object.getPrototypeOf(SlideRuler)).call(this));
+
+    _this.state = {
+      containerWidth: window.screen.width || 375,
+      canvasHeight: 83,
+      canvasWidth: 375,
+      scrollLeft: 0,
+      heightDecimal: 35,
+      heightDigit: 18,
+      lineWidth: 2,
+      colorDecimal: '#909090',
+      colorDigit: '#b4b4b4',
+      divide: 10,
+      precision: 1,
+      fontSize: 20,
+      fontColor: '#666666',
+      maxValue: 230,
+      minValue: 100,
+      currentValue: 0
+    };
+
+    _this.initCanvas = _this.initCanvas.bind(_this);
+    _this.initDates = _this.initDates.bind(_this);
+    _this.drawRuler = _this.drawRuler.bind(_this);
+    _this.handleScroll = _this.handleScroll.bind(_this);
+    _this.getCurrentValue = _this.getCurrentValue.bind(_this);
+    return _this;
+  }
+
+  _createClass(SlideRuler, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this.initCanvas(this.props);
+    }
+  }, {
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(nextProps) {
+      var _this2 = this;
+
+      if (this.props.currentValue != nextProps.currentValue) {
+        this.setState({
+          currentValue: nextProps.currentValue
+        }, function () {
+          _this2.handleCurrentValue();
+        });
+      }
+    }
+  }, {
+    key: 'initCanvas',
+    value: function initCanvas(data) {
+      var _this3 = this;
+
+      new Promise(function (resolve, reject) {
+        resolve(_this3.initDates(data));
+      }).then(function () {
+        _this3.handleCurrentValue();
+      });
+    }
+  }, {
+    key: 'initDates',
+    value: function initDates(data) {
+      var _this4 = this;
+
+      var maxValue = data.maxValue || this.state.maxValue;
+      var minValue = data.minValue || this.state.minValue;
+      var currentValue = data.currentValue || this.state.currentValue;
+      var divide = data.divide || this.state.divide;
+      var precision = data.precision || this.state.precision;
+      var containerWidth = data.containerWidth || this.state.containerWidth;
+      var canvasWidth = maxValue / precision * divide + containerWidth - minValue / precision * divide || this.state.canvasWidth;
+      var scrollLeft = (currentValue - minValue) * divide || this.state.scrollLeft;
+
+      this.setState({
+        containerWidth: data.containerWidth || this.state.containerWidth,
+        canvasHeight: data.canvasHeight || this.state.canvasHeight,
+        canvasWidth: canvasWidth,
+        scrollLeft: scrollLeft,
+        heightDecimal: data.heightDecimal || this.state.heightDecimal,
+        heightDigit: data.heightDigit || this.state.heightDigit,
+        lineWidth: data.lineWidth || this.state.lineWidth,
+        colorDecimal: data.colorDecimal || this.state.colorDecimal,
+        colorDigit: data.colorDigit || this.state.colorDigit,
+        divide: data.divide || this.state.divide,
+        precision: data.precision || this.state.precision,
+        fontSize: data.fontSize || this.state.fontSize,
+        fontColor: data.fontSize || this.state.fontColor,
+        maxValue: data.maxValue || this.state.maxValue,
+        minValue: data.minValue || this.state.minValue,
+        currentValue: data.currentValue || this.state.currentValue
+      }, function () {
+        _this4.drawRuler();
+      });
+    }
+  }, {
+    key: 'drawRuler',
+    value: function drawRuler() {
+      /* 1.定义变量 */
+
+      // 1.1 定义原点，x轴方向起点与终点各留半屏空白
+      var origin = { x: this.state.containerWidth, y: this.state.canvasHeight * 2 };
+      // 1.2 定义刻度线样式
+      var heightDecimal = this.state.heightDecimal * 2;
+      var heightDigit = this.state.heightDigit * 2;
+      var colorDecimal = this.state.colorDecimal;
+      var colorDigit = this.state.colorDigit;
+      // 1.3 定义刻度字体样式
+      var fontSize = this.state.fontSize * 2;
+      var fontColor = this.state.fontColor;
+      // 1.4 总刻度值
+      var maxValue = this.state.maxValue,
+          minValue = this.state.minValue;
+      // 1.5 每个刻度所占位的px
+      var divide = this.state.divide * 2;
+      // 1.6定义每个刻度的精度
+      var precision = this.state.precision;
+
+      var derivative = 1 / precision;
+
+      /* 2.绘制 */
+
+      // 2.1初始化context
+      var canvas = this.refs.SlideRuler,
+          context = canvas.getContext('2d');
+      // 遍历maxValue
+      for (var i = minValue / precision; i <= maxValue / precision; i++) {
+        context.beginPath();
+        // 2.2 画刻度线
+        context.moveTo(origin.x + (i - minValue / precision) * divide, 0);
+        // 画线到刻度高度，10的位数就加高
+        context.lineTo(origin.x + (i - minValue / precision) * divide, i * 2 % 20 == 0 ? heightDecimal : heightDigit);
+        // 设置属性
+        context.lineWidth = this.state.lineWidth * 2;
+        // 10的位数就加深
+        context.strokeStyle = i * 2 % 20 == 0 ? colorDecimal : colorDigit;
+        // 描线
+        context.stroke();
+        // 2.3 描绘刻度值
+        context.fillStyle = fontColor;
+        context.textAlign = "center";
+        context.textBaseline = "top";
+        if (i * 2 % 20 == 0) {
+          context.font = fontSize + 'px Arial';
+          context.fillText(Math.round(i / 10) / (derivative / 10), origin.x + (i - minValue / precision) * divide, heightDecimal);
+        }
+        context.closePath();
+      }
+    }
+  }, {
+    key: 'handleScroll',
+    value: function handleScroll(e) {
+      var _this5 = this;
+
+      var scrollLeft = e.target.scrollLeft;
+      window.requestAnimationFrame(function () {
+        _this5.props.getCurrentValue && _this5.getCurrentValue(scrollLeft);
+      });
+    }
+
+    //通过滚动计算当前值
+
+  }, {
+    key: 'getCurrentValue',
+    value: function getCurrentValue(scrollLeft) {
+      var precision = this.state.precision;
+      var scrollLeftValue = scrollLeft * precision / this.state.divide;
+      var currentValue = Math.round((scrollLeftValue + this.state.minValue) / precision) / (1 / precision);
+
+      this.props.getCurrentValue(currentValue);
+    }
+
+    //通过当前值计算滚动距离
+
+  }, {
+    key: 'handleCurrentValue',
+    value: function handleCurrentValue() {
+      var scrollLeft = (this.state.currentValue - this.state.minValue) * this.state.divide / this.state.precision;
+      this.refs.rulerBox.scrollLeft = scrollLeft;
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        { className: _index2.default.container },
+        _react2.default.createElement(
+          'div',
+          { className: _index2.default.rulerBox, onScroll: this.handleScroll, ref: 'rulerBox' },
+          _react2.default.createElement('canvas', { ref: 'SlideRuler', style: { width: this.state.canvasWidth, height: this.state.canvasHeight }, width: this.state.canvasWidth * 2, height: this.state.canvasHeight * 2 })
+        )
+      );
+    }
+  }]);
+
+  return SlideRuler;
+}(_react2.default.Component);
+
+exports.default = SlideRuler;
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(6);
+if(typeof content === 'string') content = [[module.i, content, '']];
+// Prepare cssTransformation
+var transform;
+
+var options = {}
+options.transform = transform
+// add the styles to the DOM
+var update = __webpack_require__(2)(content, options);
+if(content.locals) module.exports = content.locals;
+// Hot Module Replacement
+if(false) {
+	// When the styles change, update the <style> tags
+	if(!content.locals) {
+		module.hot.accept("!!../node_modules/css-loader/index.js??ref--1-1!../node_modules/sass-loader/lib/loader.js!./index.scss", function() {
+			var newContent = require("!!../node_modules/css-loader/index.js??ref--1-1!../node_modules/sass-loader/lib/loader.js!./index.scss");
+			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+			update(newContent);
+		});
+	}
+	// When the module is disposed, remove the <style> tags
+	module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(1)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, "body, div {\n  margin: 0;\n  padding: 0; }\n\n.index_container_2Qv {\n  position: relative;\n  width: 100%; }\n  .index_container_2Qv:before {\n    position: absolute;\n    left: 50%;\n    bottom: 0;\n    transform: translateX(-50%);\n    content: '';\n    width: 1px;\n    height: 100%;\n    background-color: #ffa000; }\n  .index_container_2Qv:after {\n    position: absolute;\n    left: 50%;\n    bottom: 0;\n    transform: translateX(-50%);\n    content: '';\n    width: 0;\n    height: 0;\n    border-right: 8px solid transparent;\n    border-bottom: 12px solid #ffa000;\n    border-left: 8px solid transparent; }\n\n.index_rulerBox_2bx {\n  width: 100%;\n  height: 83px;\n  overflow-y: hidden;\n  overflow-x: auto;\n  -webkit-overflow-scrolling: touch;\n  border-top: 1px solid #8b8b8b;\n  border-bottom: 1px solid #8b8b8b; }\n  .index_rulerBox_2bx::-webkit-scrollbar {\n    display: none; }\n", ""]);
+
+// exports
+exports.locals = {
+	"container": "index_container_2Qv",
+	"rulerBox": "index_rulerBox_2bx"
+};
+
+/***/ }),
 /* 7 */,
 /* 8 */,
 /* 9 */,
 /* 10 */,
-/* 11 */
+/* 11 */,
+/* 12 */,
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(1);
+module.exports = __webpack_require__(4);
 
 
 /***/ })
