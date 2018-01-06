@@ -72,9 +72,9 @@ export default IndexPage;
 | divide          | Nubmer   | 10           | division length of px |
 | precision       | Nubmer   | 1            | division value        |
 | fontSize        | Nubmer   | 20           | scale fontSize        |
-| fontColor       | Nubmer   | #666666      | scale fontColor       |
-| maxValue        | Function | 230          | max value             |
-| minValue        | Function | 100          | min value             |
+| fontColor       | Color    | #666666      | scale fontColor       |
+| maxValue        | Nubmer   | 230          | max value             |
+| minValue        | Nubmer   | 100          | min value             |
 | currentValue    | Function | 0            | current value         |
 
 
