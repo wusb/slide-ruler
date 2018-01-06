@@ -75,7 +75,7 @@ export default IndexPage;
 | fontColor       | Color    | #666666      | scale fontColor       |
 | maxValue        | Nubmer   | 230          | max value             |
 | minValue        | Nubmer   | 100          | min value             |
-| currentValue    | Function | 0            | current value         |
+| currentValue    | Nubmer   | 0            | current value         |
 
 
 ## License
