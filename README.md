@@ -47,7 +47,7 @@ class IndexPage extends React.Component {
                     maxValue={200}
                     minValue={20}
                     divide={5} 
-      			   precision={0.1}/>
+      				precision={0.1}/>
       </div>
     );
   }
