@@ -67,16 +67,19 @@ export default IndexPage;
 | heightDecimal   | Nubmer   | 35           | scale marks length    |
 | heightDigit     | Nubmer   | 18           | division marks length |
 | lineWidth       | Nubmer   | 2            | marks width           |
-| colorDecimal    | Color    | #909090      | scale marks color     |
-| colorDigit      | Color    | #b4b4b4      | division marks color  |
+| colorDecimal    | String   | #909090      | scale marks color     |
+| colorDigit      | String   | #b4b4b4      | division marks color  |
 | divide          | Nubmer   | 10           | division length of px |
 | precision       | Nubmer   | 1            | division value        |
 | fontSize        | Nubmer   | 20           | scale fontSize        |
-| fontColor       | Color    | #666666      | scale fontColor       |
+| fontColor       | String   | #666666      | scale fontColor       |
 | maxValue        | Nubmer   | 230          | max value             |
 | minValue        | Nubmer   | 100          | min value             |
 | currentValue    | Nubmer   | 0            | current value         |
 
+## How to Contribute
+
+Anyone and everyone is welcome to contribute to this project. The best way to start is by checking our [open issues](https://github.com/simbawu610/react-slideRuler/issues),[submit a new issues](https://github.com/simbawu610/react-slideRuler/issues/new?labels=bug) or [feature request](https://github.com/simbawu610/react-slideRuler/issues/new?labels=enhancement), participate in discussions, upvote or downvote the issues you like or dislike.
 
 ## License
 
