@@ -2,6 +2,7 @@
  * Created by simba on 09/11/2017.
  */
 import React from 'react';
+import s from './index.scss';
 import SlideRuler from '../../../components/index.js';
 
 class IndexPage extends React.Component {
@@ -35,11 +36,12 @@ class IndexPage extends React.Component {
 
     return (
       <div>
+        <p className={s.currentValue}>{this.state.currentValue}</p>
         <SlideRuler getCurrentValue={this.getCurrentValue}
                     maxValue={200}
                     minValue={20}
                     divide={5} precision={0.1}/>
-        <p>{this.state.currentValue}</p>
+
       </div>
     );
   }
