@@ -40,6 +40,6 @@
   },
   "scripts": {
     "build": "webpack --config ./build/webpack.config.js",
-    "start": "webpack-dev-server --config ./build/webpack.config.js"
+    "start": "webpack-dev-server --open 'Google Chrome' --config ./build/webpack.config.js"
   }
 }
