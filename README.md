@@ -5,7 +5,7 @@ SlideRuler component for ReactJS
 [![npm](https://img.shields.io/npm/dy/slide-ruler.svg)](https://www.npmjs.com/package/slide-ruler)
 [![npm](https://img.shields.io/npm/l/slide-ruler.svg)](https://www.npmjs.com/package/slide-ruler)
 
-![example](http://chuantu.biz/t6/198/1515223694x-1404758279.gif)
+![example](https://i.loli.net/2018/03/19/5aaf82069b04f.gif)
 
 ## Getting Started
 
