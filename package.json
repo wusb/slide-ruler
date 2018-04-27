@@ -1,9 +1,9 @@
 {
   "name": "slide-ruler",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "main": "build/component.js",
-  "repository": "https://github.com/simbawu610/react-slideRuler.git",
-  "author": "Simbawu <wsb@baymini.com>",
+  "repository": "https://github.com/simbawus/react-slideRuler.git",
+  "author": "simbawu <connect@simbawu.com>",
   "description": "SlideRuler component for ReactJS",
   "keywords": [
     "react",

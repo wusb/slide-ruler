@@ -2,6 +2,7 @@
  * Created by simba on 01/02/2018.
  */
 import React from 'react';
+import ReactDOM from 'react-dom';
 import s from './index.scss'
 
 class SlideRuler extends React.Component {
@@ -9,7 +10,7 @@ class SlideRuler extends React.Component {
   constructor() {
     super();
     this.state = {
-      containerWidth: window.screen.width || 375,
+      containerWidth: 375,
       canvasHeight: 83,
       canvasWidth: 375,
       scrollLeft: 0,
@@ -62,12 +63,14 @@ class SlideRuler extends React.Component {
     let currentValue = data.currentValue || this.state.currentValue;
     let divide = data.divide || this.state.divide;
     let precision = data.precision || this.state.precision;
-    let containerWidth = data.containerWidth || this.state.containerWidth;
+    let containerWidth = data.containerWidth || ReactDOM.findDOMNode(this).offsetWidth;
     let canvasWidth = (maxValue/precision * divide + containerWidth - minValue/precision * divide) || this.state.canvasWidth;
     let scrollLeft = (currentValue - minValue) * divide || this.state.scrollLeft;
 
+    console.log(containerWidth);
+
     this.setState({
-      containerWidth: data.containerWidth || this.state.containerWidth,
+      containerWidth: containerWidth,
       canvasHeight: data.canvasHeight || this.state.canvasHeight,
       canvasWidth: canvasWidth,
       scrollLeft: scrollLeft,

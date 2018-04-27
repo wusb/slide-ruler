@@ -1,13 +1,13 @@
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("react"));
+		module.exports = factory(require("react"), require("react-dom"));
 	else if(typeof define === 'function' && define.amd)
-		define(["react"], factory);
+		define(["react", "react-dom"], factory);
 	else if(typeof exports === 'object')
-		exports["Calendar"] = factory(require("react"));
+		exports["Calendar"] = factory(require("react"), require("react-dom"));
 	else
-		root["Calendar"] = factory(root["react"]);
-})(typeof self !== 'undefined' ? self : this, function(__WEBPACK_EXTERNAL_MODULE_0__) {
+		root["Calendar"] = factory(root["react"], root["react-dom"]);
+})(typeof self !== 'undefined' ? self : this, function(__WEBPACK_EXTERNAL_MODULE_0__, __WEBPACK_EXTERNAL_MODULE_1__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -81,6 +81,12 @@ module.exports = __WEBPACK_EXTERNAL_MODULE_0__;
 
 /***/ }),
 /* 1 */
+/***/ (function(module, exports) {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE_1__;
+
+/***/ }),
+/* 2 */
 /***/ (function(module, exports) {
 
 /*
@@ -162,7 +168,7 @@ function toComment(sourceMap) {
 
 
 /***/ }),
-/* 2 */
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -208,7 +214,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(3);
+var	fixUrls = __webpack_require__(4);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -521,7 +527,7 @@ function updateLink (link, options, obj) {
 
 
 /***/ }),
-/* 3 */
+/* 4 */
 /***/ (function(module, exports) {
 
 
@@ -616,7 +622,7 @@ module.exports = function (css) {
 
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -632,7 +638,11 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _index = __webpack_require__(5);
+var _reactDom = __webpack_require__(1);
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+var _index = __webpack_require__(6);
 
 var _index2 = _interopRequireDefault(_index);
 
@@ -656,7 +666,7 @@ var SlideRuler = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (SlideRuler.__proto__ || Object.getPrototypeOf(SlideRuler)).call(this));
 
     _this.state = {
-      containerWidth: window.screen.width || 375,
+      containerWidth: 375,
       canvasHeight: 83,
       canvasWidth: 375,
       scrollLeft: 0,
@@ -721,12 +731,14 @@ var SlideRuler = function (_React$Component) {
       var currentValue = data.currentValue || this.state.currentValue;
       var divide = data.divide || this.state.divide;
       var precision = data.precision || this.state.precision;
-      var containerWidth = data.containerWidth || this.state.containerWidth;
+      var containerWidth = data.containerWidth || _reactDom2.default.findDOMNode(this).offsetWidth;
       var canvasWidth = maxValue / precision * divide + containerWidth - minValue / precision * divide || this.state.canvasWidth;
       var scrollLeft = (currentValue - minValue) * divide || this.state.scrollLeft;
 
+      console.log(containerWidth);
+
       this.setState({
-        containerWidth: data.containerWidth || this.state.containerWidth,
+        containerWidth: containerWidth,
         canvasHeight: data.canvasHeight || this.state.canvasHeight,
         canvasWidth: canvasWidth,
         scrollLeft: scrollLeft,
@@ -852,13 +864,13 @@ var SlideRuler = function (_React$Component) {
 exports.default = SlideRuler;
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(6);
+var content = __webpack_require__(7);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -866,7 +878,7 @@ var transform;
 var options = {}
 options.transform = transform
 // add the styles to the DOM
-var update = __webpack_require__(2)(content, options);
+var update = __webpack_require__(3)(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -883,10 +895,10 @@ if(false) {
 }
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(1)(undefined);
+exports = module.exports = __webpack_require__(2)(undefined);
 // imports
 
 
@@ -900,7 +912,6 @@ exports.locals = {
 };
 
 /***/ }),
-/* 7 */,
 /* 8 */,
 /* 9 */,
 /* 10 */,
@@ -909,7 +920,7 @@ exports.locals = {
 /* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(4);
+module.exports = __webpack_require__(5);
 
 
 /***/ })
