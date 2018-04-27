@@ -695,36 +695,40 @@ var SlideRuler = function (_React$Component) {
   _createClass(SlideRuler, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      this.initCanvas(this.props);
+      var _this2 = this;
+
+      setTimeout(function () {
+        _this2.initCanvas(_this2.props);
+      }, 0);
     }
   }, {
     key: 'componentWillReceiveProps',
     value: function componentWillReceiveProps(nextProps) {
-      var _this2 = this;
+      var _this3 = this;
 
       if (this.props.currentValue != nextProps.currentValue) {
         this.setState({
           currentValue: nextProps.currentValue
         }, function () {
-          _this2.handleCurrentValue();
+          _this3.handleCurrentValue();
         });
       }
     }
   }, {
     key: 'initCanvas',
     value: function initCanvas(data) {
-      var _this3 = this;
+      var _this4 = this;
 
       new Promise(function (resolve, reject) {
-        resolve(_this3.initDates(data));
+        resolve(_this4.initDates(data));
       }).then(function () {
-        _this3.handleCurrentValue();
+        _this4.handleCurrentValue();
       });
     }
   }, {
     key: 'initDates',
     value: function initDates(data) {
-      var _this4 = this;
+      var _this5 = this;
 
       var maxValue = data.maxValue || this.state.maxValue;
       var minValue = data.minValue || this.state.minValue;
@@ -755,7 +759,7 @@ var SlideRuler = function (_React$Component) {
         minValue: data.minValue || this.state.minValue,
         currentValue: data.currentValue || this.state.currentValue
       }, function () {
-        _this4.drawRuler();
+        _this5.drawRuler();
       });
     }
   }, {
@@ -815,11 +819,11 @@ var SlideRuler = function (_React$Component) {
   }, {
     key: 'handleScroll',
     value: function handleScroll(e) {
-      var _this5 = this;
+      var _this6 = this;
 
       var scrollLeft = e.target.scrollLeft;
       window.requestAnimationFrame(function () {
-        _this5.props.getCurrentValue && _this5.getCurrentValue(scrollLeft);
+        _this6.props.getCurrentValue && _this6.getCurrentValue(scrollLeft);
       });
     }
 

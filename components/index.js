@@ -36,7 +36,9 @@ class SlideRuler extends React.Component {
   }
 
   componentDidMount(){
-    this.initCanvas(this.props);
+    setTimeout(() => {
+      this.initCanvas(this.props);
+    }, 0);
   }
 
   componentWillReceiveProps(nextProps){
@@ -88,7 +90,7 @@ class SlideRuler extends React.Component {
       currentValue: data.currentValue || this.state.currentValue
     },()=>{
       this.drawRuler();
-  })
+    })
   }
 
   drawRuler(){

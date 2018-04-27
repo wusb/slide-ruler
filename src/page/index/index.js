@@ -35,7 +35,7 @@ class IndexPage extends React.Component {
   render() {
 
     return (
-      <div>
+      <div className={s.container}>
         <p className={s.currentValue}>{this.state.currentValue}</p>
         <SlideRuler getCurrentValue={this.getCurrentValue}
                     maxValue={200}
