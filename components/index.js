@@ -13,6 +13,7 @@ class SlideRuler extends React.Component {
       containerWidth: 375,
       canvasHeight: 83,
       canvasWidth: 375,
+      boxColor: '#8b8b8b',
       scrollLeft: 0,
       heightDecimal: 35,
       heightDigit: 18,
@@ -69,8 +70,6 @@ class SlideRuler extends React.Component {
     let canvasWidth = (maxValue/precision * divide + containerWidth - minValue/precision * divide) || this.state.canvasWidth;
     let scrollLeft = (currentValue - minValue) * divide || this.state.scrollLeft;
 
-    console.log(containerWidth);
-
     this.setState({
       containerWidth: containerWidth,
       canvasHeight: data.canvasHeight || this.state.canvasHeight,
@@ -87,7 +86,8 @@ class SlideRuler extends React.Component {
       fontColor: data.fontSize || this.state.fontColor,
       maxValue: data.maxValue || this.state.maxValue,
       minValue: data.minValue || this.state.minValue,
-      currentValue: data.currentValue || this.state.currentValue
+      currentValue: data.currentValue || this.state.currentValue,
+      boxColor: data.boxColor || this.state.boxColor
     },()=>{
       this.drawRuler();
     })
@@ -169,8 +169,8 @@ class SlideRuler extends React.Component {
 
   render() {
     return (
-      <div className={s.container}>
-        <div className={s.rulerBox} onScroll={this.handleScroll} ref='rulerBox'>
+      <div className={`${this.props.className} ${s.container}`}>
+        <div className={s.rulerBox} style={{borderColor: this.state.boxColor}} onScroll={this.handleScroll} ref='rulerBox'>
             <canvas ref='SlideRuler' style={{width:this.state.canvasWidth,height:this.state.canvasHeight}} width={this.state.canvasWidth * 2} height={this.state.canvasHeight * 2}></canvas>
         </div>
       </div>
