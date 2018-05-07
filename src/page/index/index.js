@@ -39,9 +39,11 @@ class IndexPage extends React.Component {
         <p className={s.currentValue}>{this.state.currentValue}</p>
         <SlideRuler getCurrentValue={this.getCurrentValue}
                     maxValue={200}
+                    className={s.slideContainer}
                     minValue={20}
-                    divide={5} precision={0.1}/>
-
+                    boxColor='#ff0000'
+                    divide={5}
+                    precision={0.1}/>
       </div>
     );
   }
