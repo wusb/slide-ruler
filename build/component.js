@@ -669,6 +669,7 @@ var SlideRuler = function (_React$Component) {
       containerWidth: 375,
       canvasHeight: 83,
       canvasWidth: 375,
+      boxColor: '#8b8b8b',
       scrollLeft: 0,
       heightDecimal: 35,
       heightDigit: 18,
@@ -739,8 +740,6 @@ var SlideRuler = function (_React$Component) {
       var canvasWidth = maxValue / precision * divide + containerWidth - minValue / precision * divide || this.state.canvasWidth;
       var scrollLeft = (currentValue - minValue) * divide || this.state.scrollLeft;
 
-      console.log(containerWidth);
-
       this.setState({
         containerWidth: containerWidth,
         canvasHeight: data.canvasHeight || this.state.canvasHeight,
@@ -757,7 +756,8 @@ var SlideRuler = function (_React$Component) {
         fontColor: data.fontSize || this.state.fontColor,
         maxValue: data.maxValue || this.state.maxValue,
         minValue: data.minValue || this.state.minValue,
-        currentValue: data.currentValue || this.state.currentValue
+        currentValue: data.currentValue || this.state.currentValue,
+        boxColor: data.boxColor || this.state.boxColor
       }, function () {
         _this5.drawRuler();
       });
@@ -852,10 +852,10 @@ var SlideRuler = function (_React$Component) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        { className: _index2.default.container },
+        { className: this.props.className + ' ' + _index2.default.container },
         _react2.default.createElement(
           'div',
-          { className: _index2.default.rulerBox, onScroll: this.handleScroll, ref: 'rulerBox' },
+          { className: _index2.default.rulerBox, style: { borderColor: this.state.boxColor }, onScroll: this.handleScroll, ref: 'rulerBox' },
           _react2.default.createElement('canvas', { ref: 'SlideRuler', style: { width: this.state.canvasWidth, height: this.state.canvasHeight }, width: this.state.canvasWidth * 2, height: this.state.canvasHeight * 2 })
         )
       );
@@ -907,11 +907,10 @@ exports = module.exports = __webpack_require__(2)(undefined);
 
 
 // module
-exports.push([module.i, "body, div {\n  margin: 0;\n  padding: 0; }\n\n.index_container_2Qv {\n  position: relative;\n  width: 100%; }\n  .index_container_2Qv:before {\n    position: absolute;\n    left: 50%;\n    bottom: 0;\n    transform: translateX(-50%);\n    content: '';\n    width: 1px;\n    height: 100%;\n    background-color: #ffa000; }\n  .index_container_2Qv:after {\n    position: absolute;\n    left: 50%;\n    bottom: 0;\n    transform: translateX(-50%);\n    content: '';\n    width: 0;\n    height: 0;\n    border-right: 8px solid transparent;\n    border-bottom: 12px solid #ffa000;\n    border-left: 8px solid transparent; }\n\n.index_rulerBox_2bx {\n  width: 100%;\n  height: 83px;\n  overflow-y: hidden;\n  overflow-x: auto;\n  -webkit-overflow-scrolling: touch;\n  border-top: 1px solid #8b8b8b;\n  border-bottom: 1px solid #8b8b8b; }\n  .index_rulerBox_2bx::-webkit-scrollbar {\n    display: none; }\n", ""]);
+exports.push([module.i, "body, div {\n  margin: 0;\n  padding: 0; }\n\n.index_rulerBox_2bx {\n  width: 100%;\n  height: 83px;\n  overflow-y: hidden;\n  overflow-x: auto;\n  -webkit-overflow-scrolling: touch;\n  border-top: 1px solid;\n  border-bottom: 1px solid; }\n  .index_rulerBox_2bx::-webkit-scrollbar {\n    display: none; }\n", ""]);
 
 // exports
 exports.locals = {
-	"container": "index_container_2Qv",
 	"rulerBox": "index_rulerBox_2bx"
 };
 
