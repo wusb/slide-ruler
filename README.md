@@ -79,7 +79,7 @@ export default IndexPage;
 
 ## How to Contribute
 
-Anyone and everyone is welcome to contribute to this project. The best way to start is by checking our [open issues](https://github.com/simbawu610/react-slideRuler/issues),[submit a new issues](https://github.com/simbawu610/react-slideRuler/issues/new?labels=bug) or [feature request](https://github.com/simbawu610/react-slideRuler/issues/new?labels=enhancement), participate in discussions, upvote or downvote the issues you like or dislike.
+Anyone and everyone is welcome to contribute to this project. The best way to start is by checking our [open issues](https://github.com/simbawus/SlideRuler/issues),[submit a new issues](https://github.com/simbawus/SlideRuler/issues/new?labels=bug) or [feature request](https://github.com/simbawus/SlideRuler/issues/new?labels=enhancement), participate in discussions, upvote or downvote the issues you like or dislike.
 
 ## License
 
