@@ -666,9 +666,9 @@ var SlideRuler = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (SlideRuler.__proto__ || Object.getPrototypeOf(SlideRuler)).call(this));
 
     _this.state = {
-      containerWidth: 375,
+      containerWidth: 320,
       canvasHeight: 83,
-      canvasWidth: 375,
+      canvasWidth: 320,
       boxColor: '#8b8b8b',
       scrollLeft: 0,
       heightDecimal: 35,

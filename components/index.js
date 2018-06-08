@@ -10,9 +10,9 @@ class SlideRuler extends React.Component {
   constructor() {
     super();
     this.state = {
-      containerWidth: 375,
+      containerWidth: 320,
       canvasHeight: 83,
-      canvasWidth: 375,
+      canvasWidth: 320,
       boxColor: '#8b8b8b',
       scrollLeft: 0,
       heightDecimal: 35,
