@@ -1,6 +1,6 @@
 module.exports = {
   entry: {
-    SlideRuler: ['./components/index.js']
+    'slide-ruler': './components/index.js'
   },
   externals: {
     'react': 'react',
