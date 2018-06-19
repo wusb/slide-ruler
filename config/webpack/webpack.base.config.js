@@ -3,9 +3,9 @@ const webpack = require('webpack');
 
 module.exports = {
   output: {
-    path: path.resolve(__dirname, '../../build'),
+    path: path.resolve(__dirname, '../../lib'),
     filename: '[name].js',
-    publicPath: '/build/',
+    publicPath: '/lib/',
     libraryTarget: 'umd',
     library: 'SlideRuler'
   },
@@ -14,7 +14,7 @@ module.exports = {
       {
         test: /\.jsx?$/,
         loader: 'babel-loader',
-        exclude: /(node_modules|build|coverage)/,
+        exclude: /(node_modules|lib|coverage)/,
         query: {
           presets: ['env']
         }
