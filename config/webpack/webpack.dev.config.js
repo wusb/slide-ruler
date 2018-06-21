@@ -2,7 +2,7 @@ const webpack = require('webpack');
 
 module.exports = {
   entry: {
-    app: ['./src/main.js']
+    demo: './src/demo.js'
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin()

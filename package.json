@@ -4,7 +4,7 @@
   "main": "lib/slide-ruler.js",
   "repository": "https://github.com/simbawus/slide-ruler.git",
   "author": "simbawu <connect@simbawu.com>",
-  "description": "SlideRuler component for ReactJS",
+  "description": "SlideRuler Component 滑尺数值选择器",
   "keywords": [
     "slide",
     "ruler",
