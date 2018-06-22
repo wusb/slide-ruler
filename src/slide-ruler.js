@@ -20,15 +20,18 @@ class sliderRuler {
       fontColor: '#666666',
       maxValue: 230,
       minValue: 100,
-      currentValue: 230
+      currentValue: 160
     };
 
     this.localState = {
       startX: 0,
       startY: 0,
       startT: 0,
+      initValue: this.options.currentValue,
       isMove: false,
-      isTouchEnd: true
+      isTouchEnd: true,
+      touchPoints: [],
+      inertialShift: 0
     };
 
     Object.assign(this.options, options);
@@ -60,9 +63,11 @@ class sliderRuler {
   }
 
   touchStart(e){
+    e.preventDefault();
     if(e.touches.length == 1 || this.localState.isTouchEnd){
+      this.touchPoints(e);
       let touch = e.touches[0];
-      console.log('touch.pageX:', touch.pageX);
+      console.log(e);
       this.localState.startX = touch.pageX;
       this.localState.startY = touch.pageY;
       this.localState.startT = new Date().getTime(); //记录手指按下的开始时间
@@ -72,30 +77,62 @@ class sliderRuler {
   }
 
   touchMove(e){
+    this.touchPoints(e);
     let touch = e.touches[0];
     let deltaX = touch.pageX - this.localState.startX;
     let deltaY = touch.pageY - this.localState.startY;
-    console.log('deltaX:', deltaX, touch.pageX, this.localState.startX);
+    console.log('deltaX:', e);
     //如果X方向上的位移大于Y方向，则认为是左右滑动
     if (Math.abs(deltaX) > Math.abs(deltaY)){
-      const {divide} = this.options;
-      this.options.currentValue += Math.round(-deltaX / divide);
-
-      window.requestAnimationFrame(() => {
-        this.dreawCanvas();
-      });
-
+      this.moveDreaw(deltaX);
       this.localState.isMove = true;
     }
   }
 
   touchEnd(e){
-    // e.preventDefault();
+    console.log(e);
     // 计算手指在屏幕上停留的时间
-    let deltaT = new Date().getTime() - this.localState.startT;
-    let index = 0;
-    if (this.localState.isMove){ //发生了左右滑动
+    let touch = e;
+    console.log(touch);
+    const {divide} = this.options;
+    console.log('currentValue1:', this.options.currentValue);
 
+    console.log(Math.round(-this.inertialShift() / divide));
+
+    this.moveDreaw(this.inertialShift());
+    this.localState.isTouchEnd = true;
+
+    console.log(this.localState.touchPoints);
+    console.log('currentValue2:', this.options.currentValue);
+    this.localState.touchPoints = [];
+  }
+
+  touchPoints(e) {
+    let touch = e.touches[0];
+    let time = new Date().getTime();
+    let shift = touch.pageX;
+    this.localState.touchPoints.push({time: time, shift: shift})
+  }
+
+  inertialShift() {
+    let s = 0;
+    if(this.localState.touchPoints.length >= 4) {
+      let _points = this.localState.touchPoints.slice(-4);
+      let v = ((_points[3].shift - _points[0].shift) / (_points[3].time - _points[0].time)) * 1000; // v 手指离开屏幕后的速度px/s
+      const a = 60000; // a 手指离开屏幕后的加速度
+      let s = Math.sign(v) * Math.pow(v, 2) / (2 * a); // s 手指离开屏幕后惯性距离
+      console.log(_points, _points[3].shift - _points[0].shift, _points[3].time - _points[0].time, v, s);
+    }
+    return s;
+  }
+
+  moveDreaw(shift) {
+    const {divide} = this.options;
+    let moveValue = Math.round(-shift / divide);
+    console.log('moveValue:', Math.abs(moveValue));
+    for (let i = 0; i<= Math.abs(moveValue); i++){
+      this.options.currentValue += Math.sign(moveValue);
+      window.requestAnimationFrame(this.dreawCanvas.bind(this));
     }
   }
 
