@@ -148,12 +148,12 @@ class sliderRuler {
     this.options.currentValue = currentValue;
     console.log('currentValue:', currentValue);
     // 1.1 定义原点，x轴方向起点与终点各留半屏空白
-    let diffCurrentMin = (currentValue - minValue) * divide,
-      startValue = currentValue - Math.floor(canvasWidth / 2 / divide * precision);
+    let diffCurrentMin = (currentValue - minValue) * divide / precision,
+      startValue = currentValue - Math.floor(canvasWidth / 2 / divide) * precision;
     startValue = startValue > minValue ? (startValue < maxValue ? startValue : maxValue) : minValue;
     let endValue = startValue + canvasWidth / divide * precision;
     endValue = endValue < maxValue ? endValue : maxValue;
-    let origin = {x: diffCurrentMin > canvasWidth / 2 ? (canvasWidth / 2 - (currentValue - startValue) * divide) * 2 : (canvasWidth / 2 - diffCurrentMin) * 2, y: canvasHeight * 2};
+    let origin = {x: diffCurrentMin > canvasWidth / 2 ? (canvasWidth / 2 - (currentValue - startValue) * divide / precision) * 2 : (canvasWidth / 2 - diffCurrentMin) * 2, y: canvasHeight * 2};
     // 1.2 定义刻度线样式
     heightDecimal = heightDecimal * 2;
     heightDigit = heightDigit * 2;
