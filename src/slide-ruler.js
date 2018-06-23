@@ -146,7 +146,6 @@ class sliderRuler {
     let {canvasWidth, canvasHeight, maxValue, minValue, currentValue, precision, divide, heightDecimal, heightDigit, lineWidth, colorDecimal, colorDigit, fontSize, fontColor} = this.options;
     currentValue = currentValue > minValue ? (currentValue < maxValue ? currentValue : maxValue) : minValue;
     this.options.currentValue = currentValue;
-    console.log('currentValue:', currentValue);
     // 1.1 定义原点，x轴方向起点与终点各留半屏空白
     let diffCurrentMin = (currentValue - minValue) * divide / precision,
       startValue = currentValue - Math.floor(canvasWidth / 2 / divide) * precision;
@@ -168,7 +167,6 @@ class sliderRuler {
     const derivative = 1 / precision;
 
     for (let i = startValue / precision; i <= endValue / precision; i++) {
-      console.log(origin.x, i, startValue);
       context.beginPath();
       // 2.2 画刻度线
       context.moveTo(origin.x + (i - startValue / precision) * divide, 0);
