@@ -123,14 +123,14 @@ class sliderRuler {
   }
 
   moveDreaw(shift) {
-    const {divide} = this.options;
+    const {divide, precision} = this.options;
     let moveValue = Math.round(-shift / divide),
       _moveValue = Math.abs(moveValue),
       draw = () => {
         if (_moveValue < 1) {
           return;
         }
-        this.options.currentValue += Math.sign(moveValue);
+        this.options.currentValue += Math.sign(moveValue) * precision;
         this.dreawCanvas();
         window.requestAnimationFrame(draw);
         _moveValue--;
