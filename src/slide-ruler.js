@@ -4,20 +4,19 @@ class sliderRuler {
   constructor(options = {}) {
     this.value = '';
     this.options = {
-      containerWidth: 320,
+      canvasWidth: document.body.clientWidth || 375,
       canvasHeight: 83,
-      canvasWidth: 320,
-      boxColor: '#8b8b8b',
+      boxColor: '#E4E4E4',
       scrollLeft: 0,
       heightDecimal: 35,
       heightDigit: 18,
       lineWidth: 2,
-      colorDecimal: '#909090',
-      colorDigit: '#b4b4b4',
+      colorDecimal: '#E4E4E4',
+      colorDigit: '#E4E4E4',
       divide: 10,
-      precision: 1,
+      precision: 2,
       fontSize: 20,
-      fontColor: '#666666',
+      fontColor: '#666',
       maxValue: 230,
       minValue: 100,
       currentValue: 160
@@ -26,12 +25,9 @@ class sliderRuler {
     this.localState = {
       startX: 0,
       startY: 0,
-      startT: 0,
-      initValue: this.options.currentValue,
       isMove: false,
       isTouchEnd: true,
-      touchPoints: [],
-      inertialShift: 0
+      touchPoints: []
     };
 
     Object.assign(this.options, options);
@@ -42,6 +38,7 @@ class sliderRuler {
   _renderBox(container) {
     const box = document.createElement('div'), canvas = document.createElement('canvas');
     this.canvas = canvas;
+    box.className = s.box;
     box.appendChild(canvas);
     container.appendChild(box);
     this._renderCanvas();
@@ -65,7 +62,6 @@ class sliderRuler {
     if (e.touches.length === 1 || this.localState.isTouchEnd) {
       this.touchPoints(e);
       let touch = e.touches[0];
-      console.log(e);
       this.localState.startX = touch.pageX;
       this.localState.startY = touch.pageY;
       this.localState.startT = new Date().getTime(); // 记录手指按下的开始时间
@@ -79,27 +75,23 @@ class sliderRuler {
     let touch = e.touches[0],
       deltaX = touch.pageX - this.localState.startX,
       deltaY = touch.pageY - this.localState.startY;
-    console.log('deltaX:', e);
     // 如果X方向上的位移大于Y方向，则认为是左右滑动
-    if (Math.abs(deltaX) > Math.abs(deltaY)) {
+    if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(Math.round(deltaX / this.options.divide)) > 0) {
+      if (!this.rebound(deltaX)) {
+        return;
+      }
       this.moveDreaw(deltaX);
       this.localState.isMove = true;
+      this.localState.startX = touch.pageX;
+      this.localState.startY = touch.pageY;
     }
   }
 
-  touchEnd(e) {
-    console.log(e);
-    const {divide} = this.options;
-    console.log('currentValue1:', this.options.currentValue);
-
-    console.log(Math.round(-this.inertialShift() / divide));
-
+  touchEnd() {
     this.moveDreaw(this.inertialShift());
     this.localState.isTouchEnd = true;
-
-    console.log(this.localState.touchPoints);
-    console.log('currentValue2:', this.options.currentValue);
     this.localState.touchPoints = [];
+    this.canvas.style.transform = 'translate3d(0, 0, 0)';
   }
 
   touchPoints(e) {
@@ -114,37 +106,54 @@ class sliderRuler {
     if (this.localState.touchPoints.length >= 4) {
       let _points = this.localState.touchPoints.slice(-4),
         v = ((_points[3].shift - _points[0].shift) / (_points[3].time - _points[0].time)) * 1000; // v 手指离开屏幕后的速度px/s
-      const a = 60000; // a 手指离开屏幕后的加速度
-      let s = Math.sign(v) * Math.pow(v, 2) / (2 * a); // s 手指离开屏幕后惯性距离
-      console.log(_points, _points[3].shift - _points[0].shift, _points[3].time - _points[0].time, v, s);
+      const a = 6000; // a 手指离开屏幕后的加速度
+      s = Math.sign(v) * Math.pow(v, 2) / (2 * a); // s 手指离开屏幕后惯性距离
     }
     return s;
   }
 
+  rebound(deltaX) {
+    const {currentValue, maxValue, minValue} = this.options;
+    if ((currentValue === minValue && deltaX > 0) || currentValue === maxValue && deltaX < 0) {
+      let reboundX = Math.sign(deltaX) * 1.5988 * Math.pow(Math.abs(deltaX), 0.7962);
+      this.canvas.style.transform = `translate3d(${reboundX}px, 0, 0)`;
+      return false;
+    }
+    return true;
+  }
+
   moveDreaw(shift) {
     const {divide} = this.options;
-    let moveValue = Math.round(-shift / divide);
-    console.log('moveValue:', Math.abs(moveValue));
-    for (let i = 0; i <= Math.abs(moveValue); i++) {
+    let moveValue = Math.round(-shift / divide),
+      _moveValue = Math.abs(moveValue);
+    let draw = () => {
+      if (_moveValue < 1) {
+        return;
+      }
       this.options.currentValue += Math.sign(moveValue);
-      window.requestAnimationFrame(this.dreawCanvas.bind(this));
-    }
+      this.dreawCanvas();
+      window.requestAnimationFrame(draw);
+      _moveValue--;
+    };
+
+    draw();
   }
 
   dreawCanvas() {
     const canvas = this.canvas,
       context = canvas.getContext('2d');
     canvas.height = canvas.height;
-    let {containerWidth, canvasHeight, maxValue, minValue, currentValue, precision, divide, heightDecimal, heightDigit, lineWidth, colorDecimal, colorDigit, fontSize, fontColor} = this.options;
+    let {canvasWidth, canvasHeight, maxValue, minValue, currentValue, precision, divide, heightDecimal, heightDigit, lineWidth, colorDecimal, colorDigit, fontSize, fontColor} = this.options;
     currentValue = currentValue > minValue ? (currentValue < maxValue ? currentValue : maxValue) : minValue;
     this.options.currentValue = currentValue;
+    console.log('currentValue:', currentValue);
     // 1.1 定义原点，x轴方向起点与终点各留半屏空白
     let diffCurrentMin = (currentValue - minValue) * divide,
-      origin = {x: diffCurrentMin > containerWidth / 2 ? 0 : (containerWidth / 2 - diffCurrentMin) * 2, y: canvasHeight * 2},
-      startValue = currentValue - containerWidth / 2 / divide * precision;
+      startValue = currentValue - Math.floor(canvasWidth / 2 / divide * precision);
     startValue = startValue > minValue ? (startValue < maxValue ? startValue : maxValue) : minValue;
-    let endValue = startValue + containerWidth / divide * precision;
+    let endValue = startValue + canvasWidth / divide * precision;
     endValue = endValue < maxValue ? endValue : maxValue;
+    let origin = {x: diffCurrentMin > canvasWidth / 2 ? (canvasWidth / 2 - (currentValue - startValue) * divide) * 2 : (canvasWidth / 2 - diffCurrentMin) * 2, y: canvasHeight * 2};
     // 1.2 定义刻度线样式
     heightDecimal = heightDecimal * 2;
     heightDigit = heightDigit * 2;
@@ -159,6 +168,7 @@ class sliderRuler {
     const derivative = 1 / precision;
 
     for (let i = startValue / precision; i <= endValue / precision; i++) {
+      console.log(origin.x, i, startValue);
       context.beginPath();
       // 2.2 画刻度线
       context.moveTo(origin.x + (i - startValue / precision) * divide, 0);
