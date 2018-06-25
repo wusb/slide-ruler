@@ -1,0 +1,37 @@
+.container {
+  padding: .1rem 0;
+}
+
+.typeName {
+  position: relative;
+  font-size: .16rem;
+  line-height: .4rem;
+  text-align: center;
+
+  &:after {
+    position: absolute;
+    z-index: 1;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+    content: '';
+    width: .5rem;
+    height: .04rem;
+    border-radius: .02rem;
+    background-color: #00b0ab;
+  }
+}
+
+.valueContainer {
+  padding-bottom: .04rem;
+  text-align: center;
+
+  > i {
+    font-size: .12rem;
+  }
+}
+
+.value {
+  padding-right: .04rem;
+  font-size: .3rem;
+}
