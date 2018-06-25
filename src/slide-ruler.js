@@ -145,6 +145,7 @@ class sliderRuler {
     canvas.height = canvas.height;
     let {canvasWidth, canvasHeight, maxValue, minValue, currentValue, handleValue, precision, divide, heightDecimal, heightDigit, lineWidth, colorDecimal, colorDigit, fontSize, fontColor} = this.options;
     currentValue = currentValue > minValue ? (currentValue < maxValue ? currentValue : maxValue) : minValue;
+    currentValue = Math.round(currentValue * 10 / precision) * precision / 10;
     this.options.currentValue = currentValue;
     handleValue && handleValue(currentValue);
     // 1.1 定义原点，x轴方向起点与终点各留半屏空白
