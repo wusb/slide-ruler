@@ -1,13 +1,9 @@
-const path = require('path');
-const webpack = require('webpack');
+const path = require('path'),
+  webpack = require('webpack');
 
 module.exports = {
   output: {
-    path: path.resolve(__dirname, '../../lib'),
-    filename: '[name].js',
-    publicPath: '/lib/',
-    libraryTarget: 'umd',
-    library: 'SlideRuler'
+    filename: '[name].js'
   },
   module: {
     rules: [
