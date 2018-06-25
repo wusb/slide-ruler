@@ -168,7 +168,7 @@ class sliderRuler {
     // 1.6定义每个刻度的精度
     const derivative = 1 / precision;
 
-    for (let i = startValue / precision; i <= endValue / precision; i++) {
+    for (let i = Math.round(startValue / precision * 10) / 10; i <= endValue / precision; i++) {
       context.beginPath();
       // 2.2 画刻度线
       context.moveTo(origin.x + (i - startValue / precision) * divide, 0);
