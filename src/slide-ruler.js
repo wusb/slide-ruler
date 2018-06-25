@@ -14,7 +14,7 @@ class sliderRuler {
       colorDecimal: '#E4E4E4',
       colorDigit: '#E4E4E4',
       divide: 10,
-      precision: 2,
+      precision: 1,
       fontSize: 20,
       fontColor: '#666',
       maxValue: 230,
@@ -143,9 +143,10 @@ class sliderRuler {
     const canvas = this.canvas,
       context = canvas.getContext('2d');
     canvas.height = canvas.height;
-    let {canvasWidth, canvasHeight, maxValue, minValue, currentValue, precision, divide, heightDecimal, heightDigit, lineWidth, colorDecimal, colorDigit, fontSize, fontColor} = this.options;
+    let {canvasWidth, canvasHeight, maxValue, minValue, currentValue, handleValue, precision, divide, heightDecimal, heightDigit, lineWidth, colorDecimal, colorDigit, fontSize, fontColor} = this.options;
     currentValue = currentValue > minValue ? (currentValue < maxValue ? currentValue : maxValue) : minValue;
     this.options.currentValue = currentValue;
+    handleValue && handleValue(currentValue);
     // 1.1 定义原点，x轴方向起点与终点各留半屏空白
     let diffCurrentMin = (currentValue - minValue) * divide / precision,
       startValue = currentValue - Math.floor(canvasWidth / 2 / divide) * precision;
