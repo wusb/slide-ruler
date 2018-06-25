@@ -1,0 +1,31 @@
+.tipsBox {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, .75);
+}
+
+.content {
+  position: fixed;
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.tipsWorld {
+  text-align: center;
+  font-size: .12rem;
+  color: #fff;
+}
+
+.qrcode {
+  display: inline-block;
+  margin-top: .1rem;
+  width: .8rem;
+  height: .8rem;
+}
