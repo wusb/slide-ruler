@@ -35,6 +35,7 @@
   },
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack --mode production --config  ./config/webpack/webpack.config.js",
+    "gh-pages": "cross-env NODE_ENV=development webpack --mode development --config  ./config/webpack/webpack.config.js",
     "start": "yarn && cross-env NODE_ENV=development webpack-dev-server --mode development --open 'Google Chrome' --config ./config/webpack/webpack.config.js"
   }
 }
