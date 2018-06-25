@@ -18,7 +18,7 @@ class DemoComponent {
       container = document.createElement('div');
     this.options.container = container;
     container.className = s.container;
-    container.innerHTML = `<div class="${s.type}"><h6 class="${s.typeName}">${typeName}</h6></div>`;
+    container.innerHTML = `<h6 class="${s.typeName}">${typeName}</h6>`;
     document.querySelector('#demo').appendChild(container);
     this._renderValueContainer();
     this._renderRuler();
