@@ -8,7 +8,7 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, '../../docs'),
-    publicPath: '/'
+    publicPath: ''
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
