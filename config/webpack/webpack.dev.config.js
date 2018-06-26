@@ -3,6 +3,7 @@ const webpack = require('webpack'),
   HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
+  mode: 'development',
   entry: {
     demo: './src/demo.js'
   },
@@ -30,6 +31,7 @@ module.exports = {
     hot: true,
     host: '0.0.0.0',
     historyApiFallback: true,
+    open: 'Google Chrome',
     port: process.env.PORT || 8097
   }
 };
