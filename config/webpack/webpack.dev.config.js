@@ -22,12 +22,7 @@ module.exports = {
         collapseWhitespace: true
       },
       hash: true,
-      cache: true,
-      showErrors: true,
-      chunks: 'demo',
-      chunksSortMode: 'auto',
-      excludeChunks: '',
-      xhtml: false
+      chunks: 'demo'
     })
   ],
   devServer: {
