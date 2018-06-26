@@ -32,6 +32,6 @@ module.exports = {
     host: '0.0.0.0',
     historyApiFallback: true,
     open: 'Google Chrome',
-    port: process.env.PORT || 8097
+    port: process.env.PORT || 8107
   }
 };
