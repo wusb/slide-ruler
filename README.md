@@ -4,6 +4,8 @@
 [![npm](https://img.shields.io/npm/dt/slide-ruler.svg)](https://www.npmjs.com/package/slide-ruler)
 [![npm](https://img.shields.io/npm/l/slide-ruler.svg)](https://www.npmjs.com/package/slide-ruler)
 
+###### [中文README](README-zh_CN.md)
+
 - Develop with native javascript, doesn't rely on any frameworks and libraries.
 - Custom color, size & any precision etc.
 - Support inertia, rebound.
