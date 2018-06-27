@@ -2,15 +2,15 @@ import s from './demo.scss';
 import DemoComponent from './demo-component';
 
 new DemoComponent({
-  typeName: '年龄',
-  unit: '年',
+  typeName: 'Age',
+  unit: 'year',
   maxValue: 2018,
   minValue: 1938,
   currentValue: 1996
 });
 
 new DemoComponent({
-  typeName: '身高',
+  typeName: 'Height',
   unit: 'cm',
   maxValue: 230,
   minValue: 100,
@@ -18,7 +18,7 @@ new DemoComponent({
 });
 
 new DemoComponent({
-  typeName: '体重',
+  typeName: 'Weight',
   unit: 'kg',
   maxValue: 200,
   minValue: 30,
