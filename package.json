@@ -40,10 +40,11 @@
     "webpack-merge": "^4.1.2"
   },
   "scripts": {
+    "cover": "istanbul cover ./node_modules/mocha/bin/_mocha",
+    "coveralls": "yarn cover --report lcovonly && cat ./coverage/lcov.info | coveralls",
     "deploy-docs": "node ./config/deploy-docs.js",
     "test": "node ./node_modules/mocha/bin/mocha --compilers js:babel-core/register ./test/SlideRuler.test.js",
     "build": "cross-env NODE_ENV=production webpack --config ./config/webpack/webpack.config.js",
     "start": "yarn && cross-env NODE_ENV=development webpack-dev-server --config ./config/webpack/webpack.config.js"
-
   }
 }
