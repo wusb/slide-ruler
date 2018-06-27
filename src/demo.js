@@ -22,7 +22,7 @@ new DemoComponent({
   unit: 'kg',
   maxValue: 200,
   minValue: 30,
-  currentValue: 76.1,
+  currentValue: 73.1,
   precision: 0.1
 });
 
