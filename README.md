@@ -1,7 +1,7 @@
 # SlideRuler
 
 [![npm](https://img.shields.io/npm/v/slide-ruler.svg)](https://www.npmjs.com/package/slide-ruler)
-[![npm](https://img.shields.io/npm/dy/slide-ruler.svg)](https://www.npmjs.com/package/slide-ruler)
+[![npm](https://img.shields.io/npm/dt/slide-ruler.svg)](https://www.npmjs.com/package/slide-ruler)
 [![npm](https://img.shields.io/npm/l/slide-ruler.svg)](https://www.npmjs.com/package/slide-ruler)
 
 - Develop with native javascript, doesn't rely on any frameworks and libraries.
@@ -10,56 +10,6 @@
 - Easy API, easy use.
 
 ![example](https://i.loli.net/2018/06/27/5b3350dd2c4cc.gif)
-
-## Getting Started
-
-### Install
-
-```shell
-yarn add slide-ruler --dev
-```
-
-### Usage Example
-
-```javascript
-import React from 'react';
-import SlideRuler from 'slide-ruler';
-
-class IndexPage extends React.Component {
-
-  constructor() {
-    super();
-
-    this.state = {
-      currentValue: 0
-    };
-
-    this.getCurrentValue = this.getCurrentValue.bind(this);
-  }
-
-  getCurrentValue(currentValue){
-    this.setState({
-      currentValue:currentValue
-    })
-  }
-
-  render() {
-    return (
-      <div>
-        <p>{this.state.currentValue}</p>
-        <SlideRuler getCurrentValue={this.getCurrentValue}
-                    maxValue={200}
-                    minValue={20}
-                    divide={5}
-                    precision={0.1}/>
-      </div>
-    );
-  }
-}
-
-export default IndexPage;
-
-```
 
 ## PropTypes
 
@@ -81,9 +31,177 @@ export default IndexPage;
 | minValue        | Nubmer   | 100          | min value             |
 | currentValue    | Nubmer   | 0            | current value         |
 
+## Getting Started
+
+### Install
+
+```shell
+yarn add slide-ruler --dev
+```
+
+### Usage Example
+
+- **Native JavaScript**
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="author" content="simbawu">
+  <title>Digital Keyboard</title>
+</head>
+<body>
+  <div id="values"></div>
+  <div id="app"></div>
+  <script src="./slide-ruler.js"></script>
+</body>
+</html>
+```
+
+```javascript
+//slide-ruler.js
+import SlideRuler from 'slide-ruler';
+
+function handleValue(value){
+  console.log(value); //SlideRuler return value
+  document.querySelector('#values').innerHTML = value;
+}
+
+new SlideRuler(
+    {
+        el: document.querySelector('#app'),
+        maxValue: 230,
+        minValue: 100,
+        currentValue: 180
+        handleValue: handleValue,
+        precision: 1
+    }
+);
+```
+
+- **React**
+
+```jsx
+import React from 'react';
+import SlideRuler from 'slide-ruler';
+
+class SlideRulerPage extends React.Component {
+
+  constructor(){
+    super();
+
+    this.handleValue = this.handleValue.bind(this);
+    this._renderSlideRuler = this._renderSlideRuler.bind(this);
+  }
+
+  componentDidMount(){
+    this._renderSlideRuler();
+  }
+
+  handleValue(value){
+    console.log(value); //SlideRuler return value
+  }
+
+  _renderSlideRuler(){
+    return new SlideRuler (
+      {
+        el: this.refs.slideRuler,
+        maxValue: 230,
+        minValue: 100,
+        currentValue: 180
+        handleValue: handleValue,
+        precision: 1
+      }
+    );
+  }
+
+  render(){
+    return (
+      <div ref='slideRuler'></div>
+    )
+  }
+}
+
+export default SlideRulerPage;
+```
+
+- **Vue**
+
+```js
+<template>
+  <div></div>
+</template>
+<script>
+import SlideRuler from 'slide-ruler';
+export default {
+  mounted () {
+    this._renderSlideRuler();
+  },
+  methods: () {
+    _renderSlideRuler() {
+    	return new SlideRuler (
+          {
+            el: this.$el,
+            maxValue: 230,
+            minValue: 100,
+            currentValue: 180
+            handleValue: handleValue,
+            precision: 1
+          }
+        );
+    },
+
+    handleValue(value) {
+      console.log(value); //SlideRuler return value
+    }
+  }
+}
+</script>
+```
+* **Angular**
+
+```typescript
+import { Component, ViewChild, OnInit, ViewEncapsulation} from '@angular/core';
+import SlideRuler from 'slide-ruler';
+
+@Component({
+  selector: 'my-app',
+  template: `
+   <div #slideRuler></div>
+  `,
+  encapsulation: ViewEncapsulation.None
+})
+export class AppComponent  implements OnInit{
+
+  @ViewChild('slideRuler') slideRuler;
+
+  ngOnInit(){
+    this._renderSlideRuler();
+  }
+
+  _renderSlideRuler(){
+    return new SlideRuler (
+          {
+            el: this.slideRuler.nativeElement,
+            maxValue: 230,
+            minValue: 100,
+            currentValue: 180
+            handleValue: handleValue,
+            precision: 1
+          }
+        );
+  }
+
+  handleValue(value) {
+    console.log(value); //SlideRuler return value
+  }
+}
+```
+
 ## How to Contribute
 
-Anyone and everyone is welcome to contribute to this project. The best way to start is by checking our [open issues](https://github.com/simbawus/SlideRuler/issues),[submit a new issues](https://github.com/simbawus/SlideRuler/issues/new?labels=bug) or [feature request](https://github.com/simbawus/SlideRuler/issues/new?labels=enhancement), participate in discussions, upvote or downvote the issues you like or dislike.
+Anyone and everyone is welcome to contribute to this project. The best way to start is by checking our [open issues](https://github.com/simbawus/slide-ruler/issues),[submit a new issues](https://github.com/simbawus/slide-ruler/issues/new?labels=bug) or [feature request](https://github.com/simbawus/slide-ruler/issues/new?labels=enhancement), participate in discussions, upvote or downvote the issues you like or dislike.
 
 ## License
 
