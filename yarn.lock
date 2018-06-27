@@ -2431,9 +2431,9 @@ escape-string-regexp@^1.0.2, escape-string-regexp@^1.0.5:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/escape-string-regexp/-/escape-string-regexp-1.0.5.tgz#1b61c0562190a8dff6ae3bb2cf0200ca130b86d4"
 
-eslint-config-booheefe@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/eslint-config-booheefe/-/eslint-config-booheefe-1.1.0.tgz#94d04e9ac86b059e2e5b62b06f27056f3dd05050"
+eslint-config-booheefe@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/eslint-config-booheefe/-/eslint-config-booheefe-1.1.2.tgz#8978df65b76654b981f6e7da259ed010196f1d0e"
 
 eslint-scope@^3.7.1:
   version "3.7.1"
