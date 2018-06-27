@@ -27,12 +27,14 @@ module.exports = {
     })
   ],
   devServer: {
+    contentBase: './',
     hot: true,
     host: '0.0.0.0',
     historyApiFallback: true,
     inline: true,
     open: 'Google Chrome',
     port: process.env.PORT || 8107,
-    publicPath: '/'
+    publicPath: '/',
+    watchContentBase: true
   }
 };
