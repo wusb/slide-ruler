@@ -13,23 +13,23 @@
 
 ## PropTypes
 
-| Property        | Type     | Default      | Description           |
-| :-------------- | :------- | :----------- | :-------------------- |
-| getCurrentValue | Function |              | get the return value  |
-| containerWidth  | Nubmer   | screen width | container width       |
-| canvasHeight    | Nubmer   | 83           | container height      |
-| heightDecimal   | Nubmer   | 35           | scale marks length    |
-| heightDigit     | Nubmer   | 18           | division marks length |
-| lineWidth       | Nubmer   | 2            | marks width           |
-| colorDecimal    | String   | #909090      | scale marks color     |
-| colorDigit      | String   | #b4b4b4      | division marks color  |
-| divide          | Nubmer   | 10           | division length of px |
-| precision       | Nubmer   | 1            | division value        |
-| fontSize        | Nubmer   | 20           | scale fontSize        |
-| fontColor       | String   | #666666      | scale fontColor       |
-| maxValue        | Nubmer   | 230          | max value             |
-| minValue        | Nubmer   | 100          | min value             |
-| currentValue    | Nubmer   | 0            | current value         |
+| Property      | Type     | Default      | Description           |
+| :------------ | :------- | :----------- | :-------------------- |
+| handleValue   | Function |              | get the return value  |
+| canvasWidth   | Nubmer   | screen width | ruler width           |
+| canvasHeight  | Nubmer   | 83           | ruler height          |
+| heightDecimal | Nubmer   | 35           | scale marks length    |
+| heightDigit   | Nubmer   | 18           | division marks length |
+| lineWidth     | Nubmer   | 2            | marks width           |
+| colorDecimal  | String   | #E4E4E4      | scale marks color     |
+| colorDigit    | String   | #E4E4E4      | division marks color  |
+| divide        | Nubmer   | 10           | division length of px |
+| precision     | Nubmer   | 1            | division value        |
+| fontSize      | Nubmer   | 20           | scale fontSize        |
+| fontColor     | String   | #666666      | scale fontColor       |
+| maxValue      | Nubmer   | 230          | max value             |
+| minValue      | Nubmer   | 100          | min value             |
+| currentValue  | Nubmer   | 100          | current value         |
 
 ## Getting Started
 
