@@ -15,7 +15,8 @@ new Promise((resolve, reject) => {
   });
 }).then(() => {
   console.log('deploy docs start');
-  simpleGit.add('.')
+  simpleGit()
+    .add('.')
     .commit('Update docs pages')
     .push(['origin', 'master'], () => console.log('deploy docs done'));
 });
