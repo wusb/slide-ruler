@@ -1,11 +1,15 @@
 # SlideRuler
-SlideRuler component for ReactJS
 
 [![npm](https://img.shields.io/npm/v/slide-ruler.svg)](https://www.npmjs.com/package/slide-ruler)
 [![npm](https://img.shields.io/npm/dy/slide-ruler.svg)](https://www.npmjs.com/package/slide-ruler)
 [![npm](https://img.shields.io/npm/l/slide-ruler.svg)](https://www.npmjs.com/package/slide-ruler)
 
-![example](https://i.loli.net/2018/03/19/5aaf82069b04f.gif)
+- Develop with native javascript, doesn't rely on any frameworks and libraries.
+- Custom color, size & any precision etc.
+- Support inertia, rebound.
+- Easy API, easy use.
+
+![example](https://i.loli.net/2018/06/27/5b3350dd2c4cc.gif)
 
 ## Getting Started
 
