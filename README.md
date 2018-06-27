@@ -1,5 +1,6 @@
 # SlideRuler
 
+[![Build Status](https://travis-ci.org/simbawus/slide-ruler.svg?branch=master)](https://travis-ci.org/simbawus/slide-ruler)
 [![npm](https://img.shields.io/npm/v/slide-ruler.svg)](https://www.npmjs.com/package/slide-ruler)
 [![npm](https://img.shields.io/npm/dt/slide-ruler.svg)](https://www.npmjs.com/package/slide-ruler)
 [![npm](https://img.shields.io/npm/l/slide-ruler.svg)](https://www.npmjs.com/package/slide-ruler)
