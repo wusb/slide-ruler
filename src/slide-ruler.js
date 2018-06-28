@@ -25,7 +25,6 @@ class sliderRuler {
     this.localState = {
       startX: 0,
       startY: 0,
-      isMove: false,
       isTouchEnd: true,
       touchPoints: []
     };
@@ -65,7 +64,6 @@ class sliderRuler {
       this.localState.startX = touch.pageX;
       this.localState.startY = touch.pageY;
       this.localState.startT = new Date().getTime(); // 记录手指按下的开始时间
-      this.localState.isMove = false; // 是否产生滑动
       this.localState.isTouchEnd = false; // 当前开始滑动
     }
   }
@@ -81,7 +79,6 @@ class sliderRuler {
         return;
       }
       this.moveDreaw(deltaX);
-      this.localState.isMove = true;
       this.localState.startX = touch.pageX;
       this.localState.startY = touch.pageY;
     }
@@ -144,33 +141,32 @@ class sliderRuler {
       context = canvas.getContext('2d');
     canvas.height = canvas.height;
     let {canvasWidth, canvasHeight, maxValue, minValue, currentValue, handleValue, precision, divide, heightDecimal, heightDigit, lineWidth, colorDecimal, colorDigit, fontSize, fontColor} = this.options;
+    // 计算当前值
     currentValue = currentValue > minValue ? (currentValue < maxValue ? currentValue : maxValue) : minValue;
     currentValue = Math.round(currentValue * 10 / precision) * precision / 10;
     this.options.currentValue = currentValue;
     handleValue && handleValue(currentValue);
-    // 1.1 定义原点，x轴方向起点与终点各留半屏空白
     let diffCurrentMin = (currentValue - minValue) * divide / precision,
       startValue = currentValue - Math.floor(canvasWidth / 2 / divide) * precision;
     startValue = startValue > minValue ? (startValue < maxValue ? startValue : maxValue) : minValue;
     let endValue = startValue + canvasWidth / divide * precision;
     endValue = endValue < maxValue ? endValue : maxValue;
+    // 定义原点
     let origin = {x: diffCurrentMin > canvasWidth / 2 ? (canvasWidth / 2 - (currentValue - startValue) * divide / precision) * 2 : (canvasWidth / 2 - diffCurrentMin) * 2, y: canvasHeight * 2};
-    // 1.2 定义刻度线样式
+    // 定义刻度线样式
     heightDecimal = heightDecimal * 2;
     heightDigit = heightDigit * 2;
     lineWidth = lineWidth * 2;
-    // 1.3 定义刻度字体样式
+    // 定义刻度字体样式
     fontSize = fontSize * 2;
-    // 1.4 总刻度值
-
-    // 1.5 每个刻度所占位的px
+    // 每个刻度所占位的px
     divide = divide * 2;
-    // 1.6定义每个刻度的精度
+    // 定义每个刻度的精度
     const derivative = 1 / precision;
 
     for (let i = Math.round(startValue / precision * 10) / 10; i <= endValue / precision; i++) {
       context.beginPath();
-      // 2.2 画刻度线
+      // 画刻度线
       context.moveTo(origin.x + (i - startValue / precision) * divide, 0);
       // 画线到刻度高度，10的位数就加高
       context.lineTo(origin.x + (i - startValue / precision) * divide, i % 10 === 0 ? heightDecimal : heightDigit);
