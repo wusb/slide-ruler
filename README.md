@@ -1,4 +1,4 @@
-# SlideRuler
+# SlideRuler [Demo](https://simbawus.github.io/slide-ruler)
 
 [![Build Status](https://travis-ci.org/simbawus/slide-ruler.svg?branch=master)](https://travis-ci.org/simbawus/slide-ruler)
 [![npm](https://img.shields.io/npm/v/slide-ruler.svg)](https://www.npmjs.com/package/slide-ruler)
