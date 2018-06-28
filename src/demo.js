@@ -34,7 +34,7 @@ new DemoComponent({
     if (!x.hasOwnProperty('ontouchstart')) {
       tipsBox.className = s.tipsBox;
       tipsBox.innerHTML = `<div class='${s.content}'>
-                            <p class='${s.tipsWorld}'>请将浏览器切换成手机模式或手机扫描二维码查看</p>
+                            <p class='${s.tipsWorld}'>请将浏览器切换成手机模式或扫码查看</p>
                             <img class='${s.qrcode}' src='https://qr.api.cli.im/qr?data=https%253A%252F%252Fsimbawus.github.io%252Fslide-ruler&level=H&transparent=false&bgcolor=%23ffffff&forecolor=%23000000&blockpixel=12&marginblock=1&logourl=&size=280&kid=cliim&key=92204c1a3fe5e2ad56f1c24b6db4952c' alt=''>
                             <div class="${s.githubButtons}">
                               <iframe src="https://ghbtns.com/github-btn.html?user=simbawus&type=follow&count=true&size=large" frameborder="0" scrolling="0" width="190px" height="30px"></iframe>
