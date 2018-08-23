@@ -29,6 +29,8 @@ class sliderRuler {
       touchPoints: []
     };
 
+    this.browserEnv = window.hasOwnProperty('ontouchstart');
+
     Object.assign(this.options, options);
 
     this.init(options);
@@ -50,17 +52,23 @@ class sliderRuler {
     canvas.style.width = canvasWidth + 'px';
     canvas.style.height = canvasHeight + 'px';
     canvas.className = s.canvas;
-    canvas.ontouchstart = this.touchStart.bind(this);
-    canvas.ontouchmove = this.touchMove.bind(this);
-    canvas.ontouchend = this.touchEnd.bind(this);
+    if (this.browserEnv) {
+      canvas.ontouchstart = this.touchStart.bind(this);
+      canvas.ontouchmove = this.touchMove.bind(this);
+      canvas.ontouchend = this.touchEnd.bind(this);
+    } else {
+      canvas.onmousedown = this.touchStart.bind(this);
+      canvas.onmousemove = this.touchMove.bind(this);
+      canvas.onmouseup = this.touchEnd.bind(this);
+    }
     this.dreawCanvas();
   }
 
   touchStart(e) {
     e.preventDefault();
-    if (e.touches.length === 1 || this.localState.isTouchEnd) {
+    if (e || this.localState.isTouchEnd) {
       this.touchPoints(e);
-      let touch = e.touches[0];
+      let touch = (e.touches && e.touches[0]) || e;
       this.localState.startX = touch.pageX;
       this.localState.startY = touch.pageY;
       this.localState.startT = new Date().getTime(); // 记录手指按下的开始时间
@@ -69,13 +77,14 @@ class sliderRuler {
   }
 
   touchMove(e) {
+    if (!this.browserEnv && (e.which !== 1 || e.buttons === 0)) return; // pc canvas超出边界处理
     this.touchPoints(e);
-    let touch = e.touches[0],
+    let touch = (e.touches && e.touches[0]) || e,
       deltaX = touch.pageX - this.localState.startX,
       deltaY = touch.pageY - this.localState.startY;
     // 如果X方向上的位移大于Y方向，则认为是左右滑动
     if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(Math.round(deltaX / this.options.divide)) > 0) {
-      if (!this.rebound(deltaX)) {
+      if (this.browserEnv && !this.rebound(deltaX)) {
         return;
       }
       this.moveDreaw(deltaX);
@@ -85,14 +94,14 @@ class sliderRuler {
   }
 
   touchEnd() {
-    this.moveDreaw(this.inertialShift());
+    this.moveDreaw(this.browserEnv ? this.inertialShift() : 0);
     this.localState.isTouchEnd = true;
     this.localState.touchPoints = [];
     this.canvas.style.transform = 'translate3d(0, 0, 0)';
   }
 
   touchPoints(e) {
-    let touch = e.touches[0],
+    let touch = (e.touches && e.touches[0]) || e,
       time = new Date().getTime(),
       shift = touch.pageX;
     this.localState.touchPoints.push({time: time, shift: shift});
