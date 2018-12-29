@@ -29,7 +29,7 @@ class sliderRuler {
       touchPoints: []
     };
 
-    this.browserEnv = window.hasOwnProperty('ontouchstart');
+    this.browserEnv = 'ontouchstart'in window;
 
     Object.assign(this.options, options);
 
