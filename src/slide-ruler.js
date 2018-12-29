@@ -65,7 +65,6 @@ class sliderRuler {
   }
 
   touchStart(e) {
-    e.preventDefault();
     if (e || this.localState.isTouchEnd) {
       this.touchPoints(e);
       let touch = (e.touches && e.touches[0]) || e;
@@ -83,7 +82,7 @@ class sliderRuler {
       deltaX = touch.pageX - this.localState.startX,
       deltaY = touch.pageY - this.localState.startY;
     // 如果X方向上的位移大于Y方向，则认为是左右滑动
-    if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(Math.round(deltaX / this.options.divide)) > 0) {
+    if (Math.abs(deltaY)<2&&Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(Math.round(deltaX / this.options.divide)) > 0) {
       if (this.browserEnv && !this.rebound(deltaX)) {
         return;
       }
