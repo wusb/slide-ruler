@@ -1,4 +1,10 @@
 {
-  "presets": ["env"],
-  "plugins": ["transform-object-assign"]
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "useBuiltIns": "entry"
+      }
+    ]
+  ]
 }

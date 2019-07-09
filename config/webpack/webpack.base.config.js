@@ -1,3 +1,10 @@
+/*
+ * @Desc: webpack基本配置
+ * @Author: simbawu
+ * @Date: 2019-04-16 20:15:13
+ * @LastEditors: simbawu
+ * @LastEditTime: 2019-07-09 19:04:25
+ */
 const path = require('path'),
   webpack = require('webpack');
 
@@ -10,28 +17,31 @@ module.exports = {
       {
         test: /\.jsx?$/,
         loader: 'babel-loader',
-        exclude: /(node_modules|lib|coverage)/,
-        query: {
-          presets: ['env']
-        }
-      }, {
+        exclude: /(node_modules|lib|coverage)/
+      },
+      {
         test: /\.scss$/,
-        use: [{
-          loader: 'style-loader'
-        }, {
-          loader: 'css-loader',
-          options: {
-            modules: true,
-            localIdentName: '[name]_[local]_[hash:base64:3]'
+        use: [
+          {
+            loader: 'style-loader'
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+              localIdentName: '[name]_[local]_[hash:base64:3]'
+            }
+          },
+          {
+            loader: 'sass-loader'
           }
-        }, {
-          loader: 'sass-loader'
-        }]
+        ]
       }
     ]
   },
   plugins: [
-    new webpack.DefinePlugin({ // 定义环境变量
+    new webpack.DefinePlugin({
+      // 定义环境变量
       'process.env': JSON.stringify(process.env.NODE_ENV)
     })
   ]
