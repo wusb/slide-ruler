@@ -1,26 +1,54 @@
+<!--
+ * @Desc: HTML模版
+ * @Author: simbawu
+ * @Date: 2019-04-16 20:15:13
+ * @LastEditors: simbawu
+ * @LastEditTime: 2019-07-09 16:49:37
+ -->
 <!DOCTYPE html>
-<html>
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0,user-scalable=no">
-	<meta name="author" content="吴胜斌,simbawu">
-	<script src="https://static.boohee.cn/js/rem.js"></script>
-	<link rel="stylesheet" href="https://static.boohee.cn/css/reset.css">
-	<title>Slide Ruler 滑尺数值选择器</title>
-	<script>
-    (function () {
-      var src = '//cdn.bootcss.com/eruda/1.4.4/eruda.min.js';
-      if (!/console=true/.test(window.location) && localStorage.getItem('active-eruda') != 'true') return;
-      document.write('<scr' + 'ipt src="' + src + '"></scr' + 'ipt>');
-      document.write('<scr' + 'ipt>eruda.init();</scr' + 'ipt>');
-    })();
-	</script>
-</head>
-<body>
-	<div id="demo"></div>
-  <div style="text-align: center">
-    <iframe src="https://ghbtns.com/github-btn.html?user=simbawus&type=follow&count=true&size=large" frameborder="0" scrolling="0" width="195px" height="30px"></iframe>
-    <iframe src="https://ghbtns.com/github-btn.html?user=simbawus&repo=slide-ruler&type=star&count=true&size=large" frameborder="0" scrolling="0" width="130px" height="30px"></iframe>
-  </div>
-</body>
+<html style="font-size: calc(100vw/3.75);">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1.0,minimum-scale=1.0, maximum-scale=1.0,user-scalable=no"
+    />
+    <meta name="author" content="吴胜斌,simbawu" />
+    <link
+      rel="stylesheet"
+      href="https://static.boohee.cn/css/reset/1.0.0/reset.min.css"
+    />
+    <title>Slide Ruler 滑尺数值选择器</title>
+    <script>
+      (function() {
+        var src = "//cdn.bootcss.com/eruda/1.4.4/eruda.min.js";
+        if (
+          !/console=true/.test(window.location) &&
+          localStorage.getItem("active-eruda") != "true"
+        )
+          return;
+        document.write("<scr" + 'ipt src="' + src + '"></scr' + "ipt>");
+        document.write("<scr" + "ipt>eruda.init();</scr" + "ipt>");
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="demo"></div>
+    <div style="text-align: center">
+      <iframe
+        src="https://ghbtns.com/github-btn.html?user=simbawus&type=follow&count=true&size=large"
+        frameborder="0"
+        scrolling="0"
+        width="195px"
+        height="30px"
+      ></iframe>
+      <iframe
+        src="https://ghbtns.com/github-btn.html?user=simbawus&repo=slide-ruler&type=star&count=true&size=large"
+        frameborder="0"
+        scrolling="0"
+        width="130px"
+        height="30px"
+      ></iframe>
+    </div>
+  </body>
 </html>
