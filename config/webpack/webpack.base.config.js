@@ -3,7 +3,7 @@
  * @Author: simbawu
  * @Date: 2019-04-16 20:15:13
  * @LastEditors: simbawu
- * @LastEditTime: 2019-07-09 19:04:25
+ * @LastEditTime: 2019-07-10 15:46:38
  */
 const path = require('path'),
   webpack = require('webpack');
@@ -28,8 +28,10 @@ module.exports = {
           {
             loader: 'css-loader',
             options: {
-              modules: true,
-              localIdentName: '[name]_[local]_[hash:base64:3]'
+              modules: {
+                mode: 'local',
+                localIdentName: '[name]_[local]_[hash:base64:3]'
+              }
             }
           },
           {
