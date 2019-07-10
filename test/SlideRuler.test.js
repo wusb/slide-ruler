@@ -1,5 +1,14 @@
-const expect = require('chai').expect, {JSDOM} = require('jsdom'),
-    {window} = new JSDOM(`<!DOCTYPE html>
+/*
+ * @Desc: test file
+ * @Author: simbawu
+ * @Date: 2019-04-16 20:15:13
+ * @LastEditors: simbawu
+ * @LastEditTime: 2019-07-10 13:44:34
+ */
+const expect = require('chai').expect,
+  { JSDOM } = require('jsdom'),
+  { window } = new JSDOM(
+    `<!DOCTYPE html>
   <html>
   <head>
       <meta charset="UTF-8">
@@ -11,7 +20,11 @@ const expect = require('chai').expect, {JSDOM} = require('jsdom'),
   <div id="values"></div>
   <div id="app"></div>
   </body>
-  </html>`);
+  </html>`,
+    {
+      url: 'http://localhost'
+    }
+  );
 
 propagateToGlobal(window);
 
@@ -26,10 +39,7 @@ function propagateToGlobal(window) {
 const SliderRuler = require('../lib/slide-ruler').default;
 
 describe('mocha tests', function() {
-
   it('render correct', function() {
     expect().to.be.equal();
   });
-
 });
-
