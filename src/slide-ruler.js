@@ -3,7 +3,7 @@
  * @Author: simbawu
  * @Date: 2019-04-16 20:15:13
  * @LastEditors: simbawu
- * @LastEditTime: 2019-07-09 19:07:45
+ * @LastEditTime: 2019-08-07 14:00:00
  */
 import s from './slide-ruler.scss';
 
@@ -24,6 +24,7 @@ class sliderRuler {
       precision: 1,
       fontSize: 20,
       fontColor: '#666',
+      fontMarginTop: 35,
       maxValue: 230,
       minValue: 100,
       currentValue: 160
@@ -183,7 +184,8 @@ class sliderRuler {
       colorDecimal,
       colorDigit,
       fontSize,
-      fontColor
+      fontColor,
+      fontMarginTop
     } = this.options;
     // 计算当前值
     currentValue =
@@ -223,6 +225,7 @@ class sliderRuler {
     lineWidth = lineWidth * 2;
     // 定义刻度字体样式
     fontSize = fontSize * 2;
+    fontMarginTop = fontMarginTop * 2;
     // 每个刻度所占位的px
     divide = divide * 2;
     // 定义每个刻度的精度
@@ -254,7 +257,7 @@ class sliderRuler {
         context.fillText(
           Math.round(i / 10) / (derivative / 10),
           origin.x + (i - startValue / precision) * divide,
-          heightDecimal
+          fontMarginTop
         );
       }
       context.closePath();
