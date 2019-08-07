@@ -5,7 +5,7 @@
 [![npm](https://img.shields.io/npm/dt/slide-ruler.svg)](https://www.npmjs.com/package/slide-ruler)
 [![npm](https://img.shields.io/npm/l/slide-ruler.svg)](https://www.npmjs.com/package/slide-ruler)
 
-###### [中文README](README-zh_CN.md)
+###### [中文 README](README-zh_CN.md)
 
 - Develop with native javascript, doesn't rely on any frameworks and libraries.
 - Custom color, size & any precision etc.
@@ -16,23 +16,24 @@
 
 ## PropTypes
 
-| Property      | Type     | Default      | Description           |
-| :------------ | :------- | :----------- | :-------------------- |
-| handleValue   | Function |              | get the return value  |
-| canvasWidth   | Number   | screen width | ruler width           |
-| canvasHeight  | Number   | 83           | ruler height          |
-| heightDecimal | Number   | 35           | scale marks length    |
-| heightDigit   | Number   | 18           | division marks length |
-| lineWidth     | Number   | 2            | marks width           |
-| colorDecimal  | String   | #E4E4E4      | scale marks color     |
-| colorDigit    | String   | #E4E4E4      | division marks color  |
-| divide        | Number   | 10           | division length of px |
-| precision     | Number   | 1            | division value        |
-| fontSize      | Number   | 20           | scale fontSize        |
-| fontColor     | String   | #666666      | scale fontColor       |
-| maxValue      | Number   | 230          | max value             |
-| minValue      | Number   | 100          | min value             |
-| currentValue  | Number   | 100          | current value         |
+| Property      | Type     | Default      | Description            |
+| :------------ | :------- | :----------- | :--------------------- |
+| handleValue   | Function |              | get the return value   |
+| canvasWidth   | Number   | screen width | ruler width            |
+| canvasHeight  | Number   | 83           | ruler height           |
+| heightDecimal | Number   | 35           | scale marks length     |
+| heightDigit   | Number   | 18           | division marks length  |
+| lineWidth     | Number   | 2            | marks width            |
+| colorDecimal  | String   | #E4E4E4      | scale marks color      |
+| colorDigit    | String   | #E4E4E4      | division marks color   |
+| divide        | Number   | 10           | division length of px  |
+| precision     | Number   | 1            | division value         |
+| fontSize      | Number   | 20           | scale fontSize         |
+| fontColor     | String   | #666666      | scale fontColor        |
+| fontMarginTop | Number   | 35           | font margin to the top |
+| maxValue      | Number   | 230          | max value              |
+| minValue      | Number   | 100          | min value              |
+| currentValue  | Number   | 100          | current value          |
 
 ## Getting Started
 
@@ -49,16 +50,16 @@ yarn add slide-ruler --dev
 ```html
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="UTF-8">
-  <meta name="author" content="simbawu">
-  <title>Digital Keyboard</title>
-</head>
-<body>
-  <div id="values"></div>
-  <div id="app"></div>
-  <script src="./slide-ruler.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="author" content="simbawu" />
+    <title>Digital Keyboard</title>
+  </head>
+  <body>
+    <div id="values"></div>
+    <div id="app"></div>
+    <script src="./slide-ruler.js"></script>
+  </body>
 </html>
 ```
 
@@ -162,7 +163,8 @@ export default {
 }
 </script>
 ```
-* **Angular**
+
+- **Angular**
 
 ```typescript
 import { Component, ViewChild, OnInit, ViewEncapsulation} from '@angular/core';
