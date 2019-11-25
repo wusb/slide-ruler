@@ -7,10 +7,11 @@
 
 ###### [中文 README](README-zh_CN.md)
 
-- Develop with native javascript, doesn't rely on any frameworks and libraries.
-- Custom color, size & any precision etc.
-- Support inertia, rebound.
-- Easy API, easy use.
+## Features
+- Developed with native javascript, doesn't rely on any frameworks and libraries.
+- Customizable colors, sizes, precision, etc.
+- Supports inertia and rebound for swiping meters.
+- Friendly API for easy use.
 
 ![example](https://i.loli.net/2018/06/27/5b3350dd2c4cc.gif)
 
