@@ -206,7 +206,7 @@ export class AppComponent  implements OnInit{
 
 ## How to Contribute
 
-Anyone and everyone is welcome to contribute to this project. The best way to start is by checking our [open issues](https://github.com/simbawus/slide-ruler/issues),[submit a new issues](https://github.com/simbawus/slide-ruler/issues/new?labels=bug) or [feature request](https://github.com/simbawus/slide-ruler/issues/new?labels=enhancement), participate in discussions, upvote or downvote the issues you like or dislike.
+Anyone and everyone is welcome to contribute to this project. The best way to start is by checking our [open issues](https://github.com/wusb/slide-ruler/issues),[submit a new issues](https://github.com/wusb/slide-ruler/issues/new?labels=bug) or [feature request](https://github.com/wusb/slide-ruler/issues/new?labels=enhancement), participate in discussions, upvote or downvote the issues you like or dislike.
 
 ## License
 
