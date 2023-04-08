@@ -1,6 +1,6 @@
 {
   "name": "slide-ruler",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "main": "lib/slide-ruler.js",
   "repository": "https://github.com/wusb/slide-ruler.git",
   "author": "simbawu <connect@simbawu.com>",
